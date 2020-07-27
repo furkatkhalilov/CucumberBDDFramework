@@ -20,14 +20,10 @@ public class _01_LoginSteps {
         driver.get("https://test.basqar.techno.study/");
     }
 
-    @When("^I enter username and password$")
+    @When("^I try to login using username and password$")
     public void i_enter_username_and_password() {
         driver.findElement(By.cssSelector("[formcontrolname=\"username\"]")).sendKeys("daulet2030@gmail.com");
         driver.findElement(By.cssSelector("[formcontrolname=\"password\"]")).sendKeys("DV@d9FjCm5hXeNFv");
-    }
-
-    @When("^I click on login$")
-    public void i_click_on_login() {
         driver.findElement(By.cssSelector("[aria-label=\"LOGIN\"]")).click();
     }
 

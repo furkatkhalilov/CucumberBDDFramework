@@ -1,6 +1,5 @@
 Feature: Login feature test
-  Scenario: Login in to basqar
+  Scenario: Successful login in to basqar
     Given I navigate to basqar
-    When I enter username and password
-    When I click on login
+    When I try to login using username and password
     Then I am logged in
