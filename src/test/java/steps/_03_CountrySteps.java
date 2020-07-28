@@ -20,4 +20,17 @@ public class _03_CountrySteps {
         String actual = countryPage.waitAndGetText(countryPage.alertDialogLocator);
         Assert.assertEquals(actual, "Country successfully updated");
     }
+
+    @When("^I delete a country$")
+    public void i_delete_a_country()  {
+        countryPage.waitAndClick(countryPage.deleteButtonLocator);
+        countryPage.waitAndClick(countryPage.dialogSubmitButtonLocator);
+    }
+
+    @Then("^country is successfully deleted$")
+    public void country_is_successfully_deleted() {
+        String actual = countryPage.waitAndGetText(countryPage.alertDialogLocator);
+        Assert.assertEquals(actual, "Country successfully deleted");
+        // TODO: the list doesn't contain the country that we deleted
+    }
 }
