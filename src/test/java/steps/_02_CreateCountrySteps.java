@@ -1,15 +1,9 @@
 package steps;
 
 import cucumber.api.java.en.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import poms.CountryPOM;
 import poms.MenuPOM;
-import utils.BaseDriver;
 
 public class _02_CreateCountrySteps {
 
