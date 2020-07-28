@@ -13,7 +13,7 @@ Feature: Full country feature test
     When I try to login using username and password
     Then I am logged in
     Given I navigate to country screen
-    When I edit a country
+    When I edit "America" country
     Then country is successfully edited
 
   Scenario: Successful country deletion in basqar

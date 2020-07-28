@@ -15,6 +15,13 @@ public class _03_CountrySteps {
         countryPage.waitAndClick(countryPage.saveButtonLocator);
     }
 
+    @When("^I edit \"([^\"]*)\" country$")
+    public void i_edit_country(String countryName) {
+        countryPage.waitAndClick(countryPage.editButtonLocator);
+        countryPage.waitAndSendKeys(countryPage.nameInputLocator, countryName);
+        countryPage.waitAndClick(countryPage.saveButtonLocator);
+    }
+
 
     @When("^I edit a country$")
     public void i_edit_a_country(){
