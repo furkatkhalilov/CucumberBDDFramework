@@ -8,6 +8,14 @@ public class _03_CountrySteps {
 
     CountryPOM countryPage = new CountryPOM();
 
+    @When("^I create \"([^\"]*)\" country$")
+    public void i_create_country(String countryName) {
+        countryPage.waitAndClick(countryPage.createButtonLocator);
+        countryPage.waitAndSendKeys(countryPage.nameInputLocator, countryName);
+        countryPage.waitAndClick(countryPage.saveButtonLocator);
+    }
+
+
     @When("^I edit a country$")
     public void i_edit_a_country(){
         countryPage.waitAndClick(countryPage.editButtonLocator);
