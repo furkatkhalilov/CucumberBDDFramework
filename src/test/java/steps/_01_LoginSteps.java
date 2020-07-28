@@ -29,7 +29,7 @@ public class _01_LoginSteps {
 
     @Then("^I am logged in$")
     public void i_am_logged_in() {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("img.avatar")));
     }
 
