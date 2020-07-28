@@ -17,13 +17,13 @@ public class _01_LoginSteps {
     public void i_navigate_to_basqar() {
         driver = BaseDriver.getDriver();
         driver.manage().window().maximize();
-        driver.get("https://test.basqar.mersys.io/");
+        driver.get("https://test.basqar.techno.study/");
     }
 
     @When("^I try to login using username and password$")
     public void i_enter_username_and_password() {
-        driver.findElement(By.cssSelector("[formcontrolname=\"username\"]")).sendKeys("admin");
-        driver.findElement(By.cssSelector("[formcontrolname=\"password\"]")).sendKeys("F4pj8Zsq52mX!");
+        driver.findElement(By.cssSelector("[formcontrolname=\"username\"]")).sendKeys("daulet2030@gmail.com");
+        driver.findElement(By.cssSelector("[formcontrolname=\"password\"]")).sendKeys("DV@d9FjCm5hXeNFv");
         driver.findElement(By.cssSelector("[aria-label=\"LOGIN\"]")).click();
     }
 
