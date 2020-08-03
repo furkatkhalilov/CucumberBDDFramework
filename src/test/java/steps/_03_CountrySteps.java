@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -40,7 +41,7 @@ public class _03_CountrySteps {
 
     @Then("^country is successfully edited$")
     public void country_is_successfully_edited() {
-        String actual = countryPage.waitAndGetText(countryPage.alertDialogLocator);
+        String actual = countryPage.waitForNewAndGetText(countryPage.alertDialogLocator);
         Assert.assertEquals(actual, "Country successfully updated");
     }
 
@@ -52,7 +53,7 @@ public class _03_CountrySteps {
 
     @Then("^country is successfully deleted$")
     public void country_is_successfully_deleted() {
-        String actual = countryPage.waitAndGetText(countryPage.alertDialogLocator);
+        String actual = countryPage.waitForNewAndGetText(countryPage.alertDialogLocator);
         Assert.assertEquals(actual, "Country successfully deleted");
         // TODO: the list doesn't contain the country that we deleted
     }
@@ -66,4 +67,26 @@ public class _03_CountrySteps {
     }
 
 
+    @When("^I edit  \"([^\"]*)\" to \"([^\"]*)\" country$")
+    public void iEditToCountry(String oldCountry, String newCountry) {
+        countryPage.waitAndSendKeys(countryPage.nameSearchLocator, oldCountry);
+        countryPage.waitAndClick(countryPage.searchButtonLocator);
+
+        countryPage.waitForProgressBar();
+
+        countryPage.waitAndClick(countryPage.editButtonLocator);
+        countryPage.waitAndSendKeys(countryPage.nameInputLocator, newCountry);
+        countryPage.waitAndClick(countryPage.saveButtonLocator);
+    }
+
+    @When("^I delete \"([^\"]*)\" country$")
+    public void iDeleteCountry(String countryName) throws Throwable {
+        countryPage.waitAndSendKeys(countryPage.nameSearchLocator, countryName);
+        countryPage.waitAndClick(countryPage.searchButtonLocator);
+
+        countryPage.waitForProgressBar();
+
+        countryPage.waitAndClick(countryPage.deleteButtonLocator);
+        countryPage.waitAndClick(countryPage.dialogSubmitButtonLocator);
+    }
 }
