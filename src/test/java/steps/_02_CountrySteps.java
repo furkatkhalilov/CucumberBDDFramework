@@ -1,21 +1,36 @@
 package steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import poms.CountryPOM;
-import utils.BaseDriver;
+import poms.MenuPOM;
 
-import java.util.List;
+public class _02_CountrySteps {
 
-public class _03_CountrySteps {
+    CountryPOM countryPage;
 
-    CountryPOM countryPage = new CountryPOM();
+    @Given("^I navigate to country screen$")
+    public void i_navigate_to_country_screen()  {
+        countryPage =new CountryPOM();
+        MenuPOM menu = new MenuPOM();
+        menu.waitAndClick(menu.setupMenuLocator);
+        menu.waitAndClick(menu.parametersMenuLocator);
+        menu.waitAndClick(menu.countriesMenuLocator);
+
+    }
+
+    @When("^I create a country$")
+    public void i_create_a_country()  {
+        countryPage.waitAndClick(countryPage.createButtonLocator);
+        countryPage.waitAndSendKeys(countryPage.nameInputLocator, "country name");
+        countryPage.waitAndClick(countryPage.saveButtonLocator);
+    }
+
+    @Then("^country is successfully created$")
+    public void country_is_successfully_created()  {
+        String actual = countryPage.waitForNewAndGetText(countryPage.alertDialogLocator);
+        Assert.assertEquals(actual, "Country successfully created");
+    }
 
     @When("^I create \"([^\"]*)\" country$")
     public void i_create_country(String countryName) {
@@ -63,6 +78,7 @@ public class _03_CountrySteps {
         countryPage.waitAndSendKeys(countryPage.nameSearchLocator, countryName);
         countryPage.waitAndClick(countryPage.searchButtonLocator);
         countryPage.waitForProgressBar();
+
         countryPage.deleteAllElementsFromTable();
     }
 
