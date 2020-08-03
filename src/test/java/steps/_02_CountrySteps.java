@@ -75,9 +75,7 @@ public class _02_CountrySteps {
 
     @And("^\"([^\"]*)\" country doesn't exist$")
     public void countryDoesnTExist(String countryName) {
-        countryPage.waitAndSendKeys(countryPage.nameSearchLocator, countryName);
-        countryPage.waitAndClick(countryPage.searchButtonLocator);
-        countryPage.waitForProgressBar();
+        countryPage.searchFor(countryName);
 
         countryPage.deleteAllElementsFromTable();
     }
@@ -85,10 +83,7 @@ public class _02_CountrySteps {
 
     @When("^I edit  \"([^\"]*)\" to \"([^\"]*)\" country$")
     public void iEditToCountry(String oldCountry, String newCountry) {
-        countryPage.waitAndSendKeys(countryPage.nameSearchLocator, oldCountry);
-        countryPage.waitAndClick(countryPage.searchButtonLocator);
-
-        countryPage.waitForProgressBar();
+        countryPage.searchFor(oldCountry);
 
         countryPage.waitAndClick(countryPage.editButtonLocator);
         countryPage.waitAndSendKeys(countryPage.nameInputLocator, newCountry);
@@ -97,11 +92,7 @@ public class _02_CountrySteps {
 
     @When("^I delete \"([^\"]*)\" country$")
     public void iDeleteCountry(String countryName) throws Throwable {
-        countryPage.waitAndSendKeys(countryPage.nameSearchLocator, countryName);
-        countryPage.waitAndClick(countryPage.searchButtonLocator);
-
-        countryPage.waitForProgressBar();
-
+        countryPage.searchFor(countryName);
         countryPage.waitAndClick(countryPage.deleteButtonLocator);
         countryPage.waitAndClick(countryPage.dialogSubmitButtonLocator);
     }

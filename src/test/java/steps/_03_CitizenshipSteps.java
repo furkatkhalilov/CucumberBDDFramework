@@ -23,9 +23,7 @@ public class _03_CitizenshipSteps {
 
     @And("^\"([^\"]*)\" citizenship doesn't exist$")
     public void citizenshipDoesnTExist(String citizenshipName) {
-        citizenshipPage.waitAndSendKeys(citizenshipPage.nameSearchLocator, citizenshipName);
-        citizenshipPage.waitAndClick(citizenshipPage.searchButtonLocator);
-        citizenshipPage.waitForProgressBar();
+        citizenshipPage.searchFor(citizenshipName);
 
         citizenshipPage.deleteAllElementsFromTable();
     }
@@ -45,10 +43,7 @@ public class _03_CitizenshipSteps {
 
     @When("^I edit  \"([^\"]*)\" to \"([^\"]*)\" citizenship$")
     public void iEditToCitizenship(String oldCitizenship, String newCitizenship) {
-        citizenshipPage.waitAndSendKeys(citizenshipPage.nameSearchLocator, oldCitizenship);
-        citizenshipPage.waitAndClick(citizenshipPage.searchButtonLocator);
-
-        citizenshipPage.waitForProgressBar();
+        citizenshipPage.searchFor(oldCitizenship);
 
         citizenshipPage.waitAndClick(citizenshipPage.editButtonLocator);
         citizenshipPage.waitAndSendKeys(citizenshipPage.nameInputLocator, newCitizenship);
@@ -62,15 +57,14 @@ public class _03_CitizenshipSteps {
     }
 
     @When("^I delete \"([^\"]*)\" citizenship$")
-    public void iDeleteCitizenship(String citizenshipName) throws Throwable {
-        citizenshipPage.waitAndSendKeys(citizenshipPage.nameSearchLocator, citizenshipName);
-        citizenshipPage.waitAndClick(citizenshipPage.searchButtonLocator);
-
-        citizenshipPage.waitForProgressBar();
+    public void iDeleteCitizenship(String citizenshipName) {
+        citizenshipPage.searchFor(citizenshipName);
 
         citizenshipPage.waitAndClick(citizenshipPage.deleteButtonLocator);
         citizenshipPage.waitAndClick(citizenshipPage.dialogSubmitButtonLocator);
     }
+
+
 
 
     @Then("^citizenship is successfully deleted$")

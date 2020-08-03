@@ -12,4 +12,9 @@ public class TablePOM extends BasePOM {
     public By alertDialogLocator = By.cssSelector("div[role='alertdialog']");
     public By nameSearchLocator = By.cssSelector("ms-text-field[placeholder='GENERAL.FIELD.NAME'] > input");
 
+    public void searchFor(String citizenshipName) {
+        waitAndSendKeys(nameSearchLocator, citizenshipName);
+        waitAndClick(searchButtonLocator);
+        waitForProgressBar();
+    }
 }
