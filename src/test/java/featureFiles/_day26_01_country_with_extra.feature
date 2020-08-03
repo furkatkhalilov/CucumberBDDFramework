@@ -6,8 +6,8 @@ Feature: Full country feature test
     Then I am logged in
     Given I navigate to country screen
     And "Brazilia" country doesn't exist
-#    When I create "Brazilia" country
-#    Then country is successfully created
+    When I create "Brazilia" country
+    Then country is successfully created
 
   Scenario: Successful country edit in basqar
     Given I navigate to basqar

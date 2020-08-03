@@ -4,6 +4,7 @@ import cucumber.api.java.en.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import poms.CountryPOM;
@@ -66,15 +67,18 @@ public class _03_CountrySteps {
         WebDriver driver = BaseDriver.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, 10);
         List<WebElement> elements = driver.findElements(By.cssSelector("ms-browse-table tbody > tr"));
-        while (elements.size() > 0) {
-            deleteFirstElement(elements);
-            elements = driver.findElements(By.cssSelector("ms-browse-table tbody > tr"));
+        int numberOfElements = elements.size();
+        while (numberOfElements > 0) {
+            deleteFirstElement(driver);
+            wait.until(ExpectedConditions.numberOfElementsToBeLessThan(By.cssSelector("ms-browse-table tbody > tr"), numberOfElements));
+            numberOfElements = driver.findElements(By.cssSelector("ms-browse-table tbody > tr")).size();
         }
 
 
     }
 
-    private void deleteFirstElement(List<WebElement> elements) {
+    private void deleteFirstElement(WebDriver driver) {
+        List<WebElement> elements = driver.findElements(By.cssSelector("ms-browse-table tbody > tr"));
         elements.get(0).findElement(countryPage.deleteButtonLocator).click();
         countryPage.waitAndClick(countryPage.dialogSubmitButtonLocator);
     }
