@@ -12,7 +12,7 @@ public class _03_CitizenshipSteps {
     private CitizenshipPOM citizenship;
 
     @Given("^I navigate to citizenship screen$")
-    public void i_navigate_to_country_screen()  {
+    public void i_navigate_to_citizenship_screen()  {
         citizenship =new CitizenshipPOM();
         MenuPOM menu = new MenuPOM();
         menu.waitAndClick(menu.setupMenuLocator);
@@ -22,8 +22,8 @@ public class _03_CitizenshipSteps {
     }
 
     @And("^\"([^\"]*)\" citizenship doesn't exist$")
-    public void countryDoesnTExist(String countryName) {
-        citizenship.waitAndSendKeys(citizenship.nameSearchLocator, countryName);
+    public void citizenshipDoesnTExist(String citizenshipName) {
+        citizenship.waitAndSendKeys(citizenship.nameSearchLocator, citizenshipName);
         citizenship.waitAndClick(citizenship.searchButtonLocator);
         citizenship.waitForProgressBar();
 
@@ -31,15 +31,15 @@ public class _03_CitizenshipSteps {
     }
 
     @Then("^citizenship is successfully created$")
-    public void country_is_successfully_created()  {
+    public void citizenship_is_successfully_created()  {
         String actual = citizenship.waitForNewAndGetText(citizenship.alertDialogLocator);
         Assert.assertEquals(actual, "Citizenship successfully created");
     }
 
     @When("^I create \"([^\"]*)\" citizenship$")
-    public void i_create_country(String countryName) {
+    public void i_create_citizenship(String citizenshipName) {
         citizenship.waitAndClick(citizenship.createButtonLocator);
-        citizenship.waitAndSendKeys(citizenship.nameInputLocator, countryName);
+        citizenship.waitAndSendKeys(citizenship.nameInputLocator, citizenshipName);
         citizenship.waitAndClick(citizenship.saveButtonLocator);
     }
 }
