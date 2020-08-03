@@ -8,11 +8,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.BaseDriver;
 
+import java.util.List;
+
 public class BasePOM {
     protected WebDriverWait wait;
     protected WebDriver driver;
 
-    private By progressBarLocator = By.tagName("mat-progress-bar");
+    public By progressBarLocator = By.tagName("mat-progress-bar");
+    public By deleteButtonLocator = By.cssSelector("ms-delete-button > button");
+    public By dialogSubmitButtonLocator = By.cssSelector("mat-dialog-actions button[type='submit']");
+    public By rowLocator = By.cssSelector("ms-browse-table tbody > tr");
 
     public BasePOM() {
         driver = BaseDriver.getDriver();
@@ -35,6 +40,15 @@ public class BasePOM {
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator)).getText();
     }
 
+    public String waitForNewAndGetText(By locator) {
+        // get the current number of alert dialogs
+        int size = driver.findElements(locator).size();
+        // then wait for the number to grow
+        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(locator, size));
+        // then return the first one
+        return driver.findElement(locator).getText();
+    }
+
     public void waitForProgressBar() {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(progressBarLocator));
@@ -42,5 +56,21 @@ public class BasePOM {
         } catch (TimeoutException e) {
             System.out.println("There's no progress bar continue");
         }
+    }
+
+    public void deleteAllElementsFromTable() {
+        List<WebElement> elements = driver.findElements(rowLocator);
+        int numberOfElements = elements.size();
+        while (numberOfElements > 0) {
+            deleteFirstElementFromTable();
+            wait.until(ExpectedConditions.numberOfElementsToBeLessThan(rowLocator, numberOfElements));
+            numberOfElements = driver.findElements(rowLocator).size();
+        }
+    }
+
+    public void deleteFirstElementFromTable() {
+        List<WebElement> elements = driver.findElements(rowLocator);
+        elements.get(0).findElement(deleteButtonLocator).click();
+        waitAndClick(dialogSubmitButtonLocator);
     }
 }

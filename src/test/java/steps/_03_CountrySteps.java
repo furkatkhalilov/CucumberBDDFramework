@@ -61,25 +61,9 @@ public class _03_CountrySteps {
     public void countryDoesnTExist(String countryName) {
         countryPage.waitAndSendKeys(countryPage.nameSearchLocator, countryName);
         countryPage.waitAndClick(countryPage.searchButtonLocator);
-
         countryPage.waitForProgressBar();
-
-        WebDriver driver = BaseDriver.getDriver();
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        List<WebElement> elements = driver.findElements(By.cssSelector("ms-browse-table tbody > tr"));
-        int numberOfElements = elements.size();
-        while (numberOfElements > 0) {
-            deleteFirstElement(driver);
-            wait.until(ExpectedConditions.numberOfElementsToBeLessThan(By.cssSelector("ms-browse-table tbody > tr"), numberOfElements));
-            numberOfElements = driver.findElements(By.cssSelector("ms-browse-table tbody > tr")).size();
-        }
-
-
+        countryPage.deleteAllElementsFromTable();
     }
 
-    private void deleteFirstElement(WebDriver driver) {
-        List<WebElement> elements = driver.findElements(By.cssSelector("ms-browse-table tbody > tr"));
-        elements.get(0).findElement(countryPage.deleteButtonLocator).click();
-        countryPage.waitAndClick(countryPage.dialogSubmitButtonLocator);
-    }
+
 }

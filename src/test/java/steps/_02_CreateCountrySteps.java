@@ -28,7 +28,7 @@ public class _02_CreateCountrySteps {
 
     @Then("^country is successfully created$")
     public void country_is_successfully_created()  {
-        String actual = countryPage.waitAndGetText(countryPage.alertDialogLocator);
+        String actual = countryPage.waitForNewAndGetText(countryPage.alertDialogLocator);
         Assert.assertEquals(actual, "Country successfully created");
     }
 
