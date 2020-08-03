@@ -10,6 +10,8 @@ public class CountryPOM extends BasePOM {
     public By dialogSubmitButtonLocator = By.cssSelector("mat-dialog-actions button[type='submit']");
     public By nameInputLocator = By.cssSelector("[formcontrolname=\"name\"] > input");
     public By saveButtonLocator = By.tagName("ms-save-button");
+    public By searchButtonLocator = By.tagName("ms-search-button");
     public By alertDialogLocator = By.cssSelector("div[role='alertdialog']");
+    public By nameSearchLocator = By.cssSelector("ms-text-field[placeholder='GENERAL.FIELD.NAME'] > input");
 
 }

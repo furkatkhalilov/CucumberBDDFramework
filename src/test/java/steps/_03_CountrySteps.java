@@ -1,8 +1,15 @@
 package steps;
 
 import cucumber.api.java.en.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import poms.CountryPOM;
+import utils.BaseDriver;
+
+import java.util.List;
 
 public class _03_CountrySteps {
 
@@ -47,5 +54,28 @@ public class _03_CountrySteps {
         String actual = countryPage.waitAndGetText(countryPage.alertDialogLocator);
         Assert.assertEquals(actual, "Country successfully deleted");
         // TODO: the list doesn't contain the country that we deleted
+    }
+
+    @And("^\"([^\"]*)\" country doesn't exist$")
+    public void countryDoesnTExist(String countryName) {
+        countryPage.waitAndSendKeys(countryPage.nameSearchLocator, countryName);
+        countryPage.waitAndClick(countryPage.searchButtonLocator);
+
+        countryPage.waitForProgressBar();
+
+        WebDriver driver = BaseDriver.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        List<WebElement> elements = driver.findElements(By.cssSelector("ms-browse-table tbody > tr"));
+        while (elements.size() > 0) {
+            deleteFirstElement(elements);
+            elements = driver.findElements(By.cssSelector("ms-browse-table tbody > tr"));
+        }
+
+
+    }
+
+    private void deleteFirstElement(List<WebElement> elements) {
+        elements.get(0).findElement(countryPage.deleteButtonLocator).click();
+        countryPage.waitAndClick(countryPage.dialogSubmitButtonLocator);
     }
 }

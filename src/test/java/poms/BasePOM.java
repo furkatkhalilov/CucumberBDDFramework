@@ -1,6 +1,7 @@
 package poms;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,6 +11,8 @@ import utils.BaseDriver;
 public class BasePOM {
     protected WebDriverWait wait;
     protected WebDriver driver;
+
+    private By progressBarLocator = By.tagName("mat-progress-bar");
 
     public BasePOM() {
         driver = BaseDriver.getDriver();
@@ -30,5 +33,14 @@ public class BasePOM {
 
     public String waitAndGetText(By locator) {
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator)).getText();
+    }
+
+    public void waitForProgressBar() {
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(progressBarLocator));
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(progressBarLocator));
+        } catch (TimeoutException e) {
+            System.out.println("There's no progress bar continue");
+        }
     }
 }
