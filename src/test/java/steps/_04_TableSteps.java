@@ -2,6 +2,8 @@ package steps;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import org.testng.Assert;
 import poms.MenuPOM;
 import poms.TablePOM;
 
@@ -27,6 +29,12 @@ public class _04_TableSteps {
     public void countryDoesnTExist(String entityName) {
         page.searchFor(entityName);
         page.deleteAllElementsFromTable();
+    }
+
+    @Then("^\"([^\"]*)\" is successfully \"([^\"]*)\"$")
+    public void country_is_successfully_edited(String entityName, String outcome) {
+        String actual = page.waitForNewAndGetText(page.alertDialogLocator);
+        Assert.assertEquals(actual, entityName + " successfully " + outcome);
     }
 
 }

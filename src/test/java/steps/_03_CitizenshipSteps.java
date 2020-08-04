@@ -11,12 +11,6 @@ import poms.MenuPOM;
 public class _03_CitizenshipSteps {
     private CitizenshipPOM citizenshipPage = new CitizenshipPOM();
 
-    @Then("^citizenship is successfully created$")
-    public void citizenship_is_successfully_created()  {
-        String actual = citizenshipPage.waitForNewAndGetText(citizenshipPage.alertDialogLocator);
-        Assert.assertEquals(actual, "Citizenship successfully created");
-    }
-
     @When("^I create \"([^\"]*)\" citizenship$")
     public void i_create_citizenship(String citizenshipName) {
         citizenshipPage.waitAndClick(citizenshipPage.createButtonLocator);
@@ -33,12 +27,6 @@ public class _03_CitizenshipSteps {
         citizenshipPage.waitAndClick(citizenshipPage.saveButtonLocator);
     }
 
-    @Then("^citizenship is successfully edited$")
-    public void citizenship_is_successfully_edited() {
-        String actual = citizenshipPage.waitForNewAndGetText(citizenshipPage.alertDialogLocator);
-        Assert.assertEquals(actual, "Citizenship successfully updated");
-    }
-
     @When("^I delete \"([^\"]*)\" citizenship$")
     public void iDeleteCitizenship(String citizenshipName) {
         citizenshipPage.searchFor(citizenshipName);
@@ -47,13 +35,4 @@ public class _03_CitizenshipSteps {
         citizenshipPage.waitAndClick(citizenshipPage.dialogSubmitButtonLocator);
     }
 
-
-
-
-    @Then("^citizenship is successfully deleted$")
-    public void citizenship_is_successfully_deleted() {
-        String actual = citizenshipPage.waitForNewAndGetText(citizenshipPage.alertDialogLocator);
-        Assert.assertEquals(actual, "Citizenship successfully deleted");
-        // TODO: the list doesn't contain the citizenship that we deleted
-    }
 }

@@ -15,12 +15,18 @@ public class _02_CountrySteps {
         countryPage.waitAndSendKeys(countryPage.nameInputLocator, "country name");
         countryPage.waitAndClick(countryPage.saveButtonLocator);
     }
-
-    @Then("^country is successfully created$")
-    public void country_is_successfully_created()  {
-        String actual = countryPage.waitForNewAndGetText(countryPage.alertDialogLocator);
-        Assert.assertEquals(actual, "Country successfully created");
+    @When("^I edit a country$")
+    public void i_edit_a_country(){
+        countryPage.waitAndClick(countryPage.editButtonLocator);
+        countryPage.waitAndSendKeys(countryPage.nameInputLocator, "country name");
+        countryPage.waitAndClick(countryPage.saveButtonLocator);
     }
+    @When("^I delete a country$")
+    public void i_delete_a_country()  {
+        countryPage.waitAndClick(countryPage.deleteButtonLocator);
+        countryPage.waitAndClick(countryPage.dialogSubmitButtonLocator);
+    }
+
 
     @When("^I create \"([^\"]*)\" country$")
     public void i_create_country(String countryName) {
@@ -34,33 +40,6 @@ public class _02_CountrySteps {
         countryPage.waitAndClick(countryPage.editButtonLocator);
         countryPage.waitAndSendKeys(countryPage.nameInputLocator, countryName);
         countryPage.waitAndClick(countryPage.saveButtonLocator);
-    }
-
-
-    @When("^I edit a country$")
-    public void i_edit_a_country(){
-        countryPage.waitAndClick(countryPage.editButtonLocator);
-        countryPage.waitAndSendKeys(countryPage.nameInputLocator, "country name");
-        countryPage.waitAndClick(countryPage.saveButtonLocator);
-    }
-
-    @Then("^country is successfully edited$")
-    public void country_is_successfully_edited() {
-        String actual = countryPage.waitForNewAndGetText(countryPage.alertDialogLocator);
-        Assert.assertEquals(actual, "Country successfully updated");
-    }
-
-    @When("^I delete a country$")
-    public void i_delete_a_country()  {
-        countryPage.waitAndClick(countryPage.deleteButtonLocator);
-        countryPage.waitAndClick(countryPage.dialogSubmitButtonLocator);
-    }
-
-    @Then("^country is successfully deleted$")
-    public void country_is_successfully_deleted() {
-        String actual = countryPage.waitForNewAndGetText(countryPage.alertDialogLocator);
-        Assert.assertEquals(actual, "Country successfully deleted");
-        // TODO: the list doesn't contain the country that we deleted
     }
 
     @When("^I edit  \"([^\"]*)\" to \"([^\"]*)\" country$")

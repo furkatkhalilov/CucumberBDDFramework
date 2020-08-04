@@ -7,7 +7,7 @@ Feature: Full citizenship feature test
     Given I navigate to "citizenship" screen
     And "Brazilia" entity doesn't exist in table
     When I create "Brazilia" citizenship
-    Then citizenship is successfully created
+    Then "Citizenship" is successfully "created"
 
   Scenario: Successful citizenship edit in basqar
     Given I navigate to basqar
@@ -16,7 +16,7 @@ Feature: Full citizenship feature test
     Given I navigate to "citizenship" screen
     And "Almania" entity doesn't exist in table
     When I edit  "Brazilia" to "Almania" citizenship
-    Then citizenship is successfully edited
+    Then "Citizenship" is successfully "updated"
 
   Scenario: Successful citizenship deletion in basqar
     Given I navigate to basqar
@@ -24,4 +24,5 @@ Feature: Full citizenship feature test
     Then I am logged in
     Given I navigate to "citizenship" screen
     When I delete "Almania" citizenship
-    Then citizenship is successfully deleted
+    Then "Citizenship" is successfully "deleted"
+    #TODO: Then list doesn't contain the citizenship that we deleted
