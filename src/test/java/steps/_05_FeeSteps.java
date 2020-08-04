@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.When;
 import poms.FeePom;
 
@@ -13,6 +14,15 @@ public class _05_FeeSteps {
         fee.waitAndSendKeys(fee.codeInputElement,code);
         fee.waitAndSendKeys(fee.intInputElement,intCode);
         fee.waitAndSendKeys(fee.priorityElement,priority);
+        fee.waitAndClick(fee.saveButtonLocator);
+    }
+
+    @When("^I edit  \"([^\"]*)\" to \"([^\"]*)\" fee$")
+    public void iEditToFee(String oldName, String newName) throws Throwable {
+        fee.searchFor(oldName);
+
+        fee.waitAndClick(fee.editButtonLocator);
+        fee.waitAndSendKeys(fee.nameInputLocator, newName);
         fee.waitAndClick(fee.saveButtonLocator);
     }
 }
