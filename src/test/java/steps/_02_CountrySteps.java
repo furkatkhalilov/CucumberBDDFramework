@@ -7,17 +7,7 @@ import poms.MenuPOM;
 
 public class _02_CountrySteps {
 
-    CountryPOM countryPage;
-
-    @Given("^I navigate to country screen$")
-    public void i_navigate_to_country_screen()  {
-        countryPage =new CountryPOM();
-        MenuPOM menu = new MenuPOM();
-        menu.waitAndClick(menu.setupMenuLocator);
-        menu.waitAndClick(menu.parametersMenuLocator);
-        menu.waitAndClick(menu.countriesMenuLocator);
-
-    }
+    CountryPOM countryPage = new CountryPOM();
 
     @When("^I create a country$")
     public void i_create_a_country()  {

@@ -9,17 +9,7 @@ import poms.CitizenshipPOM;
 import poms.MenuPOM;
 
 public class _03_CitizenshipSteps {
-    private CitizenshipPOM citizenshipPage;
-
-    @Given("^I navigate to citizenship screen$")
-    public void i_navigate_to_citizenship_screen()  {
-        citizenshipPage =new CitizenshipPOM();
-        MenuPOM menu = new MenuPOM();
-        menu.waitAndClick(menu.setupMenuLocator);
-        menu.waitAndClick(menu.parametersMenuLocator);
-        menu.waitAndClick(menu.citizenshipMenuLocator);
-
-    }
+    private CitizenshipPOM citizenshipPage = new CitizenshipPOM();
 
     @And("^\"([^\"]*)\" citizenship doesn't exist$")
     public void citizenshipDoesnTExist(String citizenshipName) {
