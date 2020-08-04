@@ -5,7 +5,7 @@ Feature: Full citizenship feature test
     When I try to login using username and password
     Then I am logged in
     Given I navigate to "citizenship" screen
-    And "Brazilia" citizenship doesn't exist
+    And "Brazilia" entity doesn't exist in table
     When I create "Brazilia" citizenship
     Then citizenship is successfully created
 
@@ -14,7 +14,7 @@ Feature: Full citizenship feature test
     When I try to login using username and password
     Then I am logged in
     Given I navigate to "citizenship" screen
-    And "Almania" citizenship doesn't exist
+    And "Almania" entity doesn't exist in table
     When I edit  "Brazilia" to "Almania" citizenship
     Then citizenship is successfully edited
 

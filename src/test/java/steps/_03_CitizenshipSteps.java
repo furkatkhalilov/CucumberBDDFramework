@@ -11,13 +11,6 @@ import poms.MenuPOM;
 public class _03_CitizenshipSteps {
     private CitizenshipPOM citizenshipPage = new CitizenshipPOM();
 
-    @And("^\"([^\"]*)\" citizenship doesn't exist$")
-    public void citizenshipDoesnTExist(String citizenshipName) {
-        citizenshipPage.searchFor(citizenshipName);
-
-        citizenshipPage.deleteAllElementsFromTable();
-    }
-
     @Then("^citizenship is successfully created$")
     public void citizenship_is_successfully_created()  {
         String actual = citizenshipPage.waitForNewAndGetText(citizenshipPage.alertDialogLocator);

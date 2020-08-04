@@ -1,10 +1,12 @@
 package steps;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import poms.CountryPOM;
 import poms.MenuPOM;
+import poms.TablePOM;
 
 public class _04_TableSteps {
+    TablePOM page = new TablePOM();
 
     @Given("^I navigate to \"([^\"]*)\" screen$")
     public void i_navigate_to_country_screen(String screenName)  {
@@ -19,7 +21,12 @@ public class _04_TableSteps {
                 menu.waitAndClick(menu.citizenshipMenuLocator);
                 break;
         }
-
-
     }
+
+    @And("^\"([^\"]*)\" entity doesn't exist in table$")
+    public void countryDoesnTExist(String entityName) {
+        page.searchFor(entityName);
+        page.deleteAllElementsFromTable();
+    }
+
 }

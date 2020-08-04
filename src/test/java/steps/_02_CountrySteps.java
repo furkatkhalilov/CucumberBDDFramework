@@ -63,14 +63,6 @@ public class _02_CountrySteps {
         // TODO: the list doesn't contain the country that we deleted
     }
 
-    @And("^\"([^\"]*)\" country doesn't exist$")
-    public void countryDoesnTExist(String countryName) {
-        countryPage.searchFor(countryName);
-
-        countryPage.deleteAllElementsFromTable();
-    }
-
-
     @When("^I edit  \"([^\"]*)\" to \"([^\"]*)\" country$")
     public void iEditToCountry(String oldCountry, String newCountry) {
         countryPage.searchFor(oldCountry);
