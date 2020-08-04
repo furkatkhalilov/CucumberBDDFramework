@@ -25,4 +25,12 @@ public class _05_FeeSteps {
         fee.waitAndSendKeys(fee.nameInputLocator, newName);
         fee.waitAndClick(fee.saveButtonLocator);
     }
+
+    @When("^I delete \"([^\"]*)\" fee$")
+    public void i_delete_fee(String name) {
+        fee.searchFor(name);
+
+        fee.waitAndClick(fee.deleteButtonLocator);
+        fee.waitAndClick(fee.dialogSubmitButtonLocator);
+    }
 }
