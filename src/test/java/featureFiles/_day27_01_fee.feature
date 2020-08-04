@@ -5,7 +5,7 @@ Feature: Full fee feature test
     When I try to login using username and password
     Then I am logged in
     Given I navigate to "fee" screen
-    When I create fee with name "Brazilia fee", code "fee1", integration code "code1" and priority "01"
+    When I create fee with name "Brazilia fee", code "fee1", integration code "code1" and priority "17"
     Then "Fee Type" is successfully "created"
 
 #  Scenario: Successful fee edit in basqar

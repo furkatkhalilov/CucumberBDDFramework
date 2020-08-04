@@ -22,6 +22,9 @@ public class _04_TableSteps {
             case "citizenship":
                 menu.waitAndClick(menu.citizenshipMenuLocator);
                 break;
+            case "fee":
+                menu.waitAndClick(menu.feeMenuLocator);
+                break;
         }
     }
 
