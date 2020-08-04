@@ -31,3 +31,5 @@ Feature: Full fee feature test
          | Alamania fee2 | Brazilia fee2|
          | Alamania fee3 | Brazilia fee3|
          | Alamania fee4 | Brazilia fee4|
+
+   # Task 4: use outline to delete several fee types
