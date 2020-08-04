@@ -10,9 +10,9 @@ public class _05_FeeSteps {
     public void i_create_fee_with_name_code_integration_code_and_priority(String name, String code, String intCode, String priority) {
         fee.waitAndClick(fee.createButtonLocator);
         fee.waitAndSendKeys(fee.nameInputLocator,name);
-        fee.waitAndSendKeys(fee.codeInputLocator,code);
-        fee.waitAndSendKeys(fee.intInputLocator,intCode);
-        fee.waitAndSendKeys(fee.priorityLocator,priority);
+        fee.waitAndSendKeys(fee.codeInputElement,code);
+        fee.waitAndSendKeys(fee.intInputElement,intCode);
+        fee.waitAndSendKeys(fee.priorityElement,priority);
         fee.waitAndClick(fee.saveButtonLocator);
     }
 }

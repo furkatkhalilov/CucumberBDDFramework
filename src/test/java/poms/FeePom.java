@@ -1,9 +1,20 @@
 package poms;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class FeePom extends TablePOM {
-    public By codeInputLocator=By.cssSelector("[formcontrolname=\"code\"] > input");
-    public By intInputLocator=By.cssSelector("[formcontrolname*=\"IntegrationCode\"] > input");
-    public By priorityLocator = By.cssSelector("[formcontrolname*=\"priority\"] > input");
+
+    public FeePom() {
+        PageFactory.initElements(driver, this);
+    }
+
+    @FindBy(css = "[formcontrolname=\"code\"] > input")
+    public WebElement codeInputElement;
+    @FindBy(css = "[formcontrolname*=\"IntegrationCode\"] > input")
+    public WebElement intInputElement;
+    @FindBy(css = "[formcontrolname*=\"priority\"] > input")
+    public WebElement priorityElement;
 }

@@ -36,6 +36,11 @@ public class BasePOM {
         webElement.sendKeys(text);
     }
 
+    public void waitAndSendKeys(WebElement element, String text) {
+        WebElement webElement = wait.until(ExpectedConditions.visibilityOf(element));
+        webElement.clear();
+        webElement.sendKeys(text);
+    }
     public String waitAndGetText(By locator) {
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator)).getText();
     }
