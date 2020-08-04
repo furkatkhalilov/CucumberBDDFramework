@@ -78,4 +78,8 @@ public class BasePOM {
         elements.get(0).findElement(deleteButtonLocator).click();
         waitAndClick(dialogSubmitButtonLocator);
     }
+
+    public Integer getNumberOfElements(By locator) {
+        return driver.findElements(locator).size();
+    }
 }

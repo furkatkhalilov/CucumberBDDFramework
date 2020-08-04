@@ -25,4 +25,4 @@ Feature: Full fee feature test
     Given I navigate to "fee" screen
     When I delete "Alamania fee1" fee
     Then "Fee Type" is successfully "deleted"
-    #TODO: Then list doesn't contain the fee that we deleted
+    Then table doesn't contain the entity by name "Alamania fee1"

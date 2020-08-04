@@ -25,4 +25,4 @@ Feature: Full country feature test
     Given I navigate to "country" screen
     When I delete "Almania" country
     Then "Country" is successfully "deleted"
-    #TODO: Then list doesn't contain the country that we deleted
+    Then table doesn't contain the entity by name "Almania"

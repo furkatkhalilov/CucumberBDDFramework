@@ -25,4 +25,4 @@ Feature: Full citizenship feature test
     Given I navigate to "citizenship" screen
     When I delete "Almania" citizenship
     Then "Citizenship" is successfully "deleted"
-    #TODO: Then list doesn't contain the citizenship that we deleted
+    Then table doesn't contain the entity by name "Almania"

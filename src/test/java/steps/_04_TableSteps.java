@@ -29,7 +29,7 @@ public class _04_TableSteps {
     }
 
     @And("^\"([^\"]*)\" entity doesn't exist in table$")
-    public void countryDoesnTExist(String entityName) {
+    public void entityDoesNotExist(String entityName) {
         page.searchFor(entityName);
         page.deleteAllElementsFromTable();
     }
@@ -38,6 +38,13 @@ public class _04_TableSteps {
     public void country_is_successfully_edited(String entityName, String outcome) {
         String actual = page.waitForNewAndGetText(page.alertDialogLocator);
         Assert.assertEquals(actual, entityName + " successfully " + outcome);
+    }
+
+    @And("^table doesn't contain the entity by name \"([^\"]*)\"$")
+    public void tableDoesNotContain(String entityName) {
+        page.searchFor(entityName);
+        int numberOfElements = page.getNumberOfElements(page.rowLocator);
+        Assert.assertEquals(numberOfElements, 0, "expecting number of entities to be zero");
     }
 
 }

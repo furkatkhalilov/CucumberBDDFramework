@@ -38,7 +38,7 @@ Feature: Full fee feature test
       Given I navigate to "fee" screen
       When I delete "<Name>" citizenship
       Then "Fee Type" is successfully "deleted"
-    #TODO: Then list doesn't contain the citizenship that we deleted
+      Then table doesn't contain the entity by name "<Name>"
 
       Examples:
          | Name |
