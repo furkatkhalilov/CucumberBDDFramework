@@ -7,11 +7,40 @@ Feature: Full fee feature test
     Given I navigate to "fee" screen
     And "Brazilia fee1" entity doesn't exist in table
     When I create fee following fields
-      | name            | Brazilia fee1 |
-      | code            | fee1          |
-      | intCode         | code1         |
-      | priority        | 17            |
+      | name     | Brazilia fee1 |
+      | code     | fee1          |
+      | intCode  | code1         |
+      | priority | 17            |
     Then "Fee Type" is successfully "created"
+
+
+  Scenario: Successful fee creating in basqar using arbitrary fields
+    Given I navigate to basqar
+    When I try to login using username and password
+    Then I am logged in
+    Given I navigate to "fee" screen
+    And "Brazilia fee1" entity doesn't exist in table
+    When I create fee following arbitrary fields
+      | name     | Brazilia fee1 |
+      | code     | fee1          |
+      | priority | 17            |
+    Then "Fee Type" is successfully "created"
+
+  Scenario: Successful fee creating in basqar with data
+    Given I navigate to basqar
+    When I try to login using username and password
+    Then I am logged in
+    Given I navigate to "fee" screen
+    And "Brazilia fee1" entity doesn't exist in table
+    When I create fee following data
+      | name          | code | intCode | priority |
+      | Brazilia fee1 | fee1 | code1   | 17       |
+      | Brazilia fee2 | fee2 | code2   | 18       |
+      | Brazilia fee3 | fee3 | code3   | 19       |
+      | Brazilia fee4 | fee4 | code4   | 20       |
+      | Brazilia fee5 | fee5 | code5   | 21       |
+#    Then "Fee Type" is successfully "created"
+
 
 #  Scenario: Successful fee edit in basqar
 #    Given I navigate to basqar

@@ -6,6 +6,7 @@ import cucumber.api.java.en.When;
 import poms.FeePom;
 
 import javax.xml.crypto.Data;
+import java.util.List;
 import java.util.Map;
 
 public class _05_FeeSteps {
@@ -48,4 +49,30 @@ public class _05_FeeSteps {
         fee.waitAndSendKeys(fee.priorityElement,fieldsMap.get("priority"));
         fee.waitAndClick(fee.saveButtonLocator);
     }
+
+    @When("^I create fee following arbitrary fields$")
+    public void iCreateFeeFollowingArbitraryFields(DataTable fields) {
+        Map<String, String> fieldsMap = fields.asMap(String.class, String.class);
+        fee.waitAndClick(fee.createButtonLocator);
+        for(String field: fieldsMap.keySet()) {
+            fee.sendKeysToField(field, fieldsMap.get(field));
+        }
+        fee.waitAndClick(fee.saveButtonLocator);
+    }
+
+    @When("^I create fee following data$")
+    public void iCreateFeeFollowingData(DataTable fields) {
+        fee.waitAndClick(fee.createButtonLocator);
+        List<Map<String, String>> maps = fields.asMaps(String.class, String.class);
+        for (Map<String, String> fieldMap : maps) {
+            fee.waitAndSendKeys(fee.nameInputLocator,fieldMap.get("name"));
+            fee.waitAndSendKeys(fee.codeInputElement,fieldMap.get("code"));
+            fee.waitAndSendKeys(fee.intInputElement,fieldMap.get("intCode"));
+            fee.waitAndSendKeys(fee.priorityElement,fieldMap.get("priority"));
+        }
+//        fee.waitAndClick(fee.saveButtonLocator);
+
+    }
+
+
 }

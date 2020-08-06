@@ -17,4 +17,21 @@ public class FeePom extends TablePOM {
     public WebElement intInputElement;
     @FindBy(css = "[formcontrolname*=\"priority\"] > input")
     public WebElement priorityElement;
+
+    public void sendKeysToField(String field, String value) {
+        switch (field) {
+            case "name":
+                waitAndSendKeys(nameInputLocator, value);
+                break;
+            case "code":
+                waitAndSendKeys(codeInputElement, value);
+                break;
+            case "intCode":
+                waitAndSendKeys(intInputElement, value);
+                break;
+            case "priority":
+                waitAndSendKeys(priorityElement, value);
+                break;
+        }
+    }
 }
