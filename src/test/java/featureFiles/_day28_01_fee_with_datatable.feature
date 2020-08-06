@@ -38,23 +38,3 @@ Feature: Full fee feature test
       | Brazilia fee2 |      | code2   | 18       | code     |
       | Brazilia fee3 | fee3 |         | 19       |          |
       | Brazilia fee4 | fee4 | code4   |          | priority |
-#    Then "Fee Type" is successfully "created"
-
-
-#  Scenario: Successful fee edit in basqar
-#    Given I navigate to basqar
-#    When I try to login using username and password
-#    Then I am logged in
-#    Given I navigate to "fee" screen
-#    And "Alamania fee1" entity doesn't exist in table
-#    When I edit  "Brazilia fee1" to "Alamania fee1" fee
-#    Then "Fee Type" is successfully "updated"
-#
-#  Scenario: Successful fee deletion in basqar
-#    Given I navigate to basqar
-#    When I try to login using username and password
-#    Then I am logged in
-#    Given I navigate to "fee" screen
-#    When I delete "Alamania fee1" fee
-#    Then "Fee Type" is successfully "deleted"
-#    Then table doesn't contain the entity by name "Alamania fee1"
