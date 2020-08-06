@@ -18,7 +18,7 @@ public class DataTableExampleSteps {
         }
     }
 
-    @Given("^I printout to console using datable map$")
+    @Given("^I printout to console using datable list of maps$")
     public void iPrintoutToConsoleUsingDatableMap(DataTable table) {
         List<Map<String, String>> mapList = table.asMaps(String.class, String.class);
         for ( Map<String, String> row: mapList) {
@@ -28,5 +28,13 @@ public class DataTableExampleSteps {
             System.out.println();
         }
 
+    }
+
+    @Given("^I printout to console using datable map only$")
+    public void iPrintoutToConsoleUsingDatableMapOnly(DataTable table) {
+        Map<String, String> map = table.asMap(String.class, String.class);
+        for (String key: map.keySet()) {
+            System.out.println(key + " : " + map.get(key) );
+        }
     }
 }
