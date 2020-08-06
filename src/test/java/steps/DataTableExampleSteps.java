@@ -4,6 +4,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 
 import java.util.List;
+import java.util.Map;
 
 public class DataTableExampleSteps {
     @Given("^I printout to console using datable$")
@@ -17,4 +18,15 @@ public class DataTableExampleSteps {
         }
     }
 
+    @Given("^I printout to console using datable map$")
+    public void iPrintoutToConsoleUsingDatableMap(DataTable table) {
+        List<Map<String, String>> mapList = table.asMaps(String.class, String.class);
+        for ( Map<String, String> row: mapList) {
+            for (String key: row.keySet()) {
+                System.out.print(key + " : " + row.get(key) + " | ");
+            }
+            System.out.println();
+        }
+
+    }
 }
