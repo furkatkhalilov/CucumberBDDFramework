@@ -61,7 +61,7 @@ public class _05_FeeSteps {
         fee.waitAndClick(fee.saveButtonLocator);
     }
 
-    @When("^I create fee following data$")
+    @When("^I try to fill in fee with following data$")
     public void iCreateFeeFollowingData(DataTable fields) {
         fee.waitAndClick(fee.createButtonLocator);
         List<Map<String, String>> maps = fields.asMaps(String.class, String.class);

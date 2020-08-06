@@ -32,7 +32,7 @@ Feature: Full fee feature test
     Then I am logged in
     Given I navigate to "fee" screen
     And "Brazilia fee1" entity doesn't exist in table
-    When I create fee following data
+    When I try to fill in fee with following data
       | name          | code | intCode | priority | errorIn   |
       |               | fee1 | code1   | 17       | name     |
       | Brazilia fee2 |      | code2   | 18       | code     |
