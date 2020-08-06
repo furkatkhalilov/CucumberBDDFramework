@@ -23,7 +23,7 @@ public class _01_LoginSteps {
     @When("^I try to login using username and password$")
     public void i_enter_username_and_password() {
         driver.findElement(By.cssSelector("[formcontrolname=\"username\"]")).sendKeys("daulet2030@gmail.com");
-        driver.findElement(By.cssSelector("[formcontrolname=\"password\"]")).sendKeys("DV@d9FjCm5hXeNFv");
+        driver.findElement(By.cssSelector("[formcontrolname=\"password\"]")).sendKeys("TechnoStudy123@");
         driver.findElement(By.cssSelector("[aria-label=\"LOGIN\"]")).click();
     }
 
