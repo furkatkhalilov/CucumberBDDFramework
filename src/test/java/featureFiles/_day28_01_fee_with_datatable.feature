@@ -51,3 +51,9 @@ Feature: Full fee feature test
       | Brazilia fee2 |      | code2   | 18       | code     |
       | Brazilia fee3 | fee3 |         | 19       |          |
       | Brazilia fee4 | fee4 | code4   |          | priority |
+
+
+    # Differences to scenario outline:
+    # 1) datatable will be run only for one step, not the whole scenario
+    # 2) it will not run you step several times, it will just provide you with datatable
+    # you must use your own loop to iterate over datatable and verify data
