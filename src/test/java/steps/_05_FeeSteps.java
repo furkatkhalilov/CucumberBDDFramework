@@ -1,8 +1,12 @@
 package steps;
 
+import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.When;
 import poms.FeePom;
+
+import javax.xml.crypto.Data;
+import java.util.Map;
 
 public class _05_FeeSteps {
     private FeePom fee = new FeePom();
@@ -32,5 +36,16 @@ public class _05_FeeSteps {
 
         fee.waitAndClick(fee.deleteButtonLocator);
         fee.waitAndClick(fee.dialogSubmitButtonLocator);
+    }
+
+    @When("^I create fee following fields$")
+    public void iCreateFeeFollowingFields(DataTable fields) {
+        Map<String, String> fieldsMap = fields.asMap(String.class, String.class);
+        fee.waitAndClick(fee.createButtonLocator);
+        fee.waitAndSendKeys(fee.nameInputLocator,fieldsMap.get("name"));
+        fee.waitAndSendKeys(fee.codeInputElement,fieldsMap.get("code"));
+        fee.waitAndSendKeys(fee.intInputElement,fieldsMap.get("intCode"));
+        fee.waitAndSendKeys(fee.priorityElement,fieldsMap.get("priority"));
+        fee.waitAndClick(fee.saveButtonLocator);
     }
 }
