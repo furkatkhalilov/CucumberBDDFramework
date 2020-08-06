@@ -33,12 +33,11 @@ Feature: Full fee feature test
     Given I navigate to "fee" screen
     And "Brazilia fee1" entity doesn't exist in table
     When I create fee following data
-      | name          | code | intCode | priority |
-      | Brazilia fee1 | fee1 | code1   | 17       |
-      | Brazilia fee2 | fee2 | code2   | 18       |
-      | Brazilia fee3 | fee3 | code3   | 19       |
-      | Brazilia fee4 | fee4 | code4   | 20       |
-      | Brazilia fee5 | fee5 | code5   | 21       |
+      | name          | code | intCode | priority | errorIn   |
+      |               | fee1 | code1   | 17       | name     |
+      | Brazilia fee2 |      | code2   | 18       | code     |
+      | Brazilia fee3 | fee3 |         | 19       |          |
+      | Brazilia fee4 | fee4 | code4   |          | priority |
 #    Then "Fee Type" is successfully "created"
 
 
