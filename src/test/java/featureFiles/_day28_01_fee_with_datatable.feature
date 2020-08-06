@@ -14,7 +14,7 @@ Feature: Full fee feature test
     Then "Fee Type" is successfully "created"
 
 
-  Scenario: Successful fee creating in basqar using arbitrary fields
+  Scenario: Successful fee creating in basqar using arbitrary fields without intCode
     Given I navigate to basqar
     When I try to login using username and password
     Then I am logged in
@@ -23,6 +23,19 @@ Feature: Full fee feature test
     When I create fee following arbitrary fields
       | name     | Brazilia fee1 |
       | code     | fee1          |
+      | priority | 17            |
+    Then "Fee Type" is successfully "created"
+
+  Scenario: Successful fee creating in basqar using arbitrary fields with intCode
+    Given I navigate to basqar
+    When I try to login using username and password
+    Then I am logged in
+    Given I navigate to "fee" screen
+    And "Brazilia fee1" entity doesn't exist in table
+    When I create fee following arbitrary fields
+      | name     | Brazilia fee1 |
+      | code     | fee1          |
+      | intCode  | code1         |
       | priority | 17            |
     Then "Fee Type" is successfully "created"
 
