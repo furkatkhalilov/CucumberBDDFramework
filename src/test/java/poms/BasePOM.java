@@ -17,7 +17,6 @@ public class BasePOM {
     public By progressBarLocator = By.tagName("mat-progress-bar");
     public By deleteButtonLocator = By.cssSelector("ms-delete-button > button");
     public By dialogSubmitButtonLocator = By.cssSelector("mat-dialog-actions button[type='submit']");
-    public By rowLocator = By.cssSelector("ms-browse-table tbody > tr");
 
     public BasePOM() {
         driver = BaseDriver.getDriver();
@@ -63,21 +62,7 @@ public class BasePOM {
         }
     }
 
-    public void deleteAllElementsFromTable() {
-        List<WebElement> elements = driver.findElements(rowLocator);
-        int numberOfElements = elements.size();
-        while (numberOfElements > 0) {
-            deleteFirstElementFromTable();
-            wait.until(ExpectedConditions.numberOfElementsToBeLessThan(rowLocator, numberOfElements));
-            numberOfElements = driver.findElements(rowLocator).size();
-        }
-    }
 
-    public void deleteFirstElementFromTable() {
-        List<WebElement> elements = driver.findElements(rowLocator);
-        elements.get(0).findElement(deleteButtonLocator).click();
-        waitAndClick(dialogSubmitButtonLocator);
-    }
 
     public Integer getNumberOfElements(By locator) {
         return driver.findElements(locator).size();

@@ -30,7 +30,7 @@ public class _04_TableSteps {
                 menu.waitAndClick(menu.discountMenuLocator);
                 break;
         }
-        page.waitForProgressBar();
+        page.waitForTableNotToBeEmpty();
     }
 
     @And("^\"([^\"]*)\" entity doesn't exist in table$")
