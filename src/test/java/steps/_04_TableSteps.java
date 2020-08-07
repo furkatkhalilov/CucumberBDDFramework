@@ -57,4 +57,10 @@ public class _04_TableSteps {
         page.searchFor(entity, field);
         page.deleteAllElementsFromTable();
     }
+
+    @Then("^\"([^\"]*)\" is successfully \"([^\"]*)\" message is present$")
+    public void isSuccessfullyMessageIsPresent(String entityName, String outcome){
+        boolean messageIsPresent = page.verifyElementsContain(page.alertDialogLocator, entityName + " successfully " + outcome);
+        Assert.assertTrue(messageIsPresent, "Message: '" + entityName + " successfully " + outcome +"' should be present on the page!");
+    }
 }

@@ -62,7 +62,15 @@ public class BasePOM {
         }
     }
 
-
+    public boolean verifyElementsContain(By locator, String text) {
+        List<WebElement> elements = driver.findElements(locator);
+        for (WebElement element : elements) {
+            if(element.getText().contains(text)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public Integer getNumberOfElements(By locator) {
         return driver.findElements(locator).size();
