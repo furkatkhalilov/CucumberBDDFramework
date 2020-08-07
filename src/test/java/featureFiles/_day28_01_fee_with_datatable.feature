@@ -5,7 +5,7 @@ Feature: Full fee feature test
     When I try to login using username and password
     Then I am logged in
     Given I navigate to "fee" screen
-    And "Brazilia fee1" entity doesn't exist in table
+    And search and delete "Brazilia fee1" entities by "name"
     When I create fee following fields
       | name     | Brazilia fee1 |
       | code     | fee1          |
@@ -19,7 +19,7 @@ Feature: Full fee feature test
     When I try to login using username and password
     Then I am logged in
     Given I navigate to "fee" screen
-    And "Brazilia fee1" entity doesn't exist in table
+    And search and delete "Brazilia fee1" entities by "name"
     When I create fee following arbitrary fields
       | name     | Brazilia fee1 |
       | code     | fee1          |
@@ -31,7 +31,7 @@ Feature: Full fee feature test
     When I try to login using username and password
     Then I am logged in
     Given I navigate to "fee" screen
-    And "Brazilia fee1" entity doesn't exist in table
+    And search and delete "Brazilia fee1" entities by "name"
     When I create fee following arbitrary fields
       | name     | Brazilia fee1 |
       | code     | fee1          |
@@ -44,7 +44,7 @@ Feature: Full fee feature test
     When I try to login using username and password
     Then I am logged in
     Given I navigate to "fee" screen
-    And "Brazilia fee1" entity doesn't exist in table
+    And search and delete "Brazilia fee1" entities by "name"
     When I try to fill in fee with following data
       | name          | code | intCode | priority | errorIn   |
       |               | fee1 | code1   | 17       | name     |

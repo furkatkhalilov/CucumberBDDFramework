@@ -52,8 +52,8 @@ public class _04_TableSteps {
         Assert.assertEquals(numberOfElements, 0, "expecting number of entities to be zero");
     }
 
-    @And("^\"([^\"]*)\" entity doesn't exist in table by \"([^\"]*)\"$")
-    public void entityDoesnTExistInTableByDescription(String entity, String field) {
+    @And("^search and delete \"([^\"]*)\" entities by \"([^\"]*)\"$")
+    public void searchAndDeleteEntitiesBy(String entity, String field) {
         page.searchFor(entity, field);
         page.deleteAllElementsFromTable();
     }
