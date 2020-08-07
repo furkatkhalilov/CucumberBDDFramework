@@ -9,5 +9,6 @@ public class MenuPOM extends BasePOM {
     public By countriesMenuLocator = By.xpath("//span[text()='Countries']");
     public By citizenshipMenuLocator = By.xpath("//span[text()='Citizenships']");
     public By feeMenuLocator = By.xpath("//span[text()='Fees']");
+    public By discountMenuLocator = By.xpath("//span[text()='Discounts']");
 
 }

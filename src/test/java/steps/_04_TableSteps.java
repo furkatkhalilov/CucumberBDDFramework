@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -11,11 +12,11 @@ public class _04_TableSteps {
     TablePOM page = new TablePOM();
 
     @Given("^I navigate to \"([^\"]*)\" screen$")
-    public void i_navigate_to_country_screen(String screenName)  {
+    public void i_navigate_to_country_screen(String screenName) {
         MenuPOM menu = new MenuPOM();
         menu.waitAndClick(menu.setupMenuLocator);
         menu.waitAndClick(menu.parametersMenuLocator);
-        switch (screenName){
+        switch (screenName) {
             case "country":
                 menu.waitAndClick(menu.countriesMenuLocator);
                 break;
@@ -24,6 +25,9 @@ public class _04_TableSteps {
                 break;
             case "fee":
                 menu.waitAndClick(menu.feeMenuLocator);
+                break;
+            case "discount":
+                menu.waitAndClick(menu.discountMenuLocator);
                 break;
         }
     }
@@ -47,4 +51,9 @@ public class _04_TableSteps {
         Assert.assertEquals(numberOfElements, 0, "expecting number of entities to be zero");
     }
 
+    @And("^\"([^\"]*)\" entity doesn't exist in table by \"([^\"]*)\"$")
+    public void entityDoesnTExistInTableByDescription(String entity, String field) {
+        page.searchFor(entity, field);
+        page.deleteAllElementsFromTable();
+    }
 }
