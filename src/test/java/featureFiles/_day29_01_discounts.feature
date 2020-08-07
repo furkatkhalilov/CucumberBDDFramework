@@ -12,3 +12,23 @@ Feature: Full discount feature test
       | priority    | 17                 |
     Then "Discount" is successfully "created"
     And search and delete "Brazilia discount1" entities by "description"
+
+  Scenario Outline: Successful discount creating in basqar and deleting using scenario outline
+    Given I navigate to basqar
+    When I try to login using username and password
+    Then I am logged in
+    Given I navigate to "discount" screen
+    And search and delete "<description>" entities by "description"
+    When I create discount following arbitrary fields
+      | description | <description> |
+      | intCode     | <intCode>     |
+      | priority    | <priority>    |
+    Then "Discount" is successfully "created"
+    And search and delete "<description>" entities by "description"
+
+    Examples:
+      | description   | intCode | priority |
+      | Brazilia fee1 | code1   | 11       |
+      | Brazilia fee2 | code2   | 12       |
+      | Brazilia fee3 | code3   | 13       |
+      | Brazilia fee4 | code4   | 14       |
