@@ -11,7 +11,7 @@ public class _04_TableSteps {
     TablePOM page = new TablePOM();
 
     @Given("^I navigate to \"([^\"]*)\" screen$")
-    public void i_navigate_to_country_screen(String screenName) {
+    public void     i_navigate_to_country_screen(String screenName) {
         MenuPOM menu = new MenuPOM();
         menu.waitAndClick(menu.setupMenuLocator);
         menu.waitAndClick(menu.parametersMenuLocator);
@@ -27,6 +27,9 @@ public class _04_TableSteps {
                 break;
             case "discount":
                 menu.waitAndClick(menu.discountMenuLocator);
+                break;
+                case "nationality":
+                menu.waitAndClick(menu.nationalityMenuLocator);
                 break;
         }
         page.waitForTableNotToBeEmpty();
