@@ -15,8 +15,7 @@ public class BasePOM {
     protected WebDriver driver;
 
     public By progressBarLocator = By.tagName("mat-progress-bar");
-    public By deleteButtonLocator = By.cssSelector("ms-delete-button > button");
-    public By dialogSubmitButtonLocator = By.cssSelector("mat-dialog-actions button[type='submit']");
+
 
     public BasePOM() {
         driver = BaseDriver.getDriver();
@@ -27,6 +26,11 @@ public class BasePOM {
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         driver.findElement(locator).click();
+    }
+
+    public void waitAndClick(WebElement element) {
+        WebElement webElement = wait.until(ExpectedConditions.visibilityOf(element));
+        webElement.click();
     }
 
     public void waitAndSendKeys(By locator, String text) {

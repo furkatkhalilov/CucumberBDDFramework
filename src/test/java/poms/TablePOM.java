@@ -2,57 +2,130 @@ package poms;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
 public class TablePOM extends BasePOM {
 
-    public By createButtonLocator = By.cssSelector("[data-icon=\"plus\"]");
-    public By editButtonLocator = By.cssSelector("ms-edit-button > button");
-    public By nameInputLocator = By.cssSelector("[formcontrolname=\"name\"] > input");
-    public By saveButtonLocator = By.tagName("ms-save-button");
-    public By searchButtonLocator = By.tagName("ms-search-button");
+    public TablePOM() {
+        PageFactory.initElements(driver, this);
+    }
+
+    @FindBy(css = "[data-icon=\"plus\"]")
+    public WebElement createButtonElement;
+    @FindBy(css = "ms-edit-button > button")
+    public WebElement editButtonElement;
+    @FindBy(css = "[formcontrolname=\"name\"] > input")
+    public WebElement nameInputElement;
+    @FindBy(tagName = "ms-save-button")
+    public WebElement saveButtonElement;
+    @FindBy(tagName = "ms-search-button")
+    public WebElement searchButtonElement;
+    @FindBy(css = "div[role='alertdialog']")
+    public WebElement alertDialogElement;
     public By alertDialogLocator = By.cssSelector("div[role='alertdialog']");
-    public By nameSearchLocator = By.cssSelector("ms-text-field[placeholder='GENERAL.FIELD.NAME'] > input");
-    public By descSearchLocator = By.cssSelector("ms-text-field[placeholder*='DESCRIPTION'] > input");
-    public By codeSearchLocator = By.cssSelector("ms-text-field[placeholder*='FIELD.CODE'] > input");
+    @FindBy(css = "ms-text-field[placeholder='GENERAL.FIELD.NAME'] > input")
+    public WebElement nameSearchElement;
+    @FindBy(css = "ms-text-field[placeholder*='DESCRIPTION'] > input")
+    public WebElement descSearchElement;
+    @FindBy(css = "ms-text-field[placeholder*='FIELD.CODE'] > input")
+    public WebElement codeSearchElement;
+    @FindBy(css = "ms-browse-table tbody > tr")
+    public List<WebElement> rowElement;
     public By rowLocator = By.cssSelector("ms-browse-table tbody > tr");
+    @FindBy(css = "[formcontrolname=\"description\"] > input")
+    public WebElement descInputElement;
+    @FindBy(css = "[formcontrolname*=\"priority\"] > input")
+    public WebElement priorityElement;
+
+    @FindBy(css = "[formcontrolname=\"code\"] > input")
+    public WebElement codeInputElement;
+    @FindBy(css = "[placeholder*=\"INTEGRATION_CODE\"] > input")
+    public WebElement intCodeInputElement;
+    public By deleteButtonLocator = By.cssSelector("ms-delete-button > button");
+    @FindBy(css = "mat-dialog-actions button[type='submit']")
+    public WebElement dialogSubmitButtonElement;
+
+    public void sendKeysToField(String field, String value) {
+        switch (field) {
+            case "name":
+                waitAndSendKeys(nameInputElement, value);
+                break;
+            case "code":
+                waitAndSendKeys(codeInputElement, value);
+                break;
+            case "intCode":
+                waitAndSendKeys(intCodeInputElement, value);
+                break;
+            case "priority":
+                waitAndSendKeys(priorityElement, value);
+                break;
+            case "description":
+                waitAndSendKeys(descInputElement, value);
+                break;
+        }
+    }
+
+    public boolean findErrorIn(String errorIn) {
+        String classAttribute = "";
+        switch (errorIn) {
+            case "name":
+                classAttribute = nameInputElement.getAttribute("class");
+                break;
+            case "code":
+                classAttribute = codeInputElement.getAttribute("class");
+                break;
+            case "intCode":
+                classAttribute = intCodeInputElement.getAttribute("class");
+                break;
+            case "priority":
+                classAttribute = priorityElement.getAttribute("class");
+                break;
+            case "description":
+                classAttribute = descInputElement.getAttribute("class");
+                break;
+        }
+        return classAttribute.contains("ng-invalid");
+    }
 
     public void searchFor(String citizenshipName) {
-        waitAndSendKeys(nameSearchLocator, citizenshipName);
-        waitAndClick(searchButtonLocator);
+        waitAndSendKeys(nameSearchElement, citizenshipName);
+        waitAndClick(searchButtonElement);
         waitForProgressBar();
     }
 
     public void searchFor(String entity, String field) {
-        By locator = null;
+        WebElement element = null;
         switch (field) {
             case "name":
-                locator = nameSearchLocator;
+                element = nameSearchElement;
                 break;
             case "description":
-                locator = descSearchLocator;
+                element = descSearchElement;
                 break;
             case "code":
-                locator = codeSearchLocator;
+                element = codeSearchElement;
                 break;
         }
-        waitAndSendKeys(locator, entity);
-        waitAndClick(searchButtonLocator);
+        waitAndSendKeys(element, entity);
+        waitAndClick(searchButtonElement);
         waitForProgressBar();
     }
 
     public void waitForTableNotToBeEmpty() {
         try {
             wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(rowLocator, 0));
+            // TODO: to use webelement to check for numberOfElementsToBeMoreThan condition
         } catch (Exception e) {
             System.out.println("The table is empty, nevermind!");
         }
     }
 
     public void deleteAllElementsFromTable() {
-        List<WebElement> elements = driver.findElements(rowLocator);
+        List<WebElement> elements = rowElement;
         int numberOfElements = elements.size();
         while (numberOfElements > 0) {
             deleteFirstElementFromTable();
@@ -62,8 +135,8 @@ public class TablePOM extends BasePOM {
     }
 
     public void deleteFirstElementFromTable() {
-        List<WebElement> elements = driver.findElements(rowLocator);
+        List<WebElement> elements = rowElement;
         elements.get(0).findElement(deleteButtonLocator).click();
-        waitAndClick(dialogSubmitButtonLocator);
+        waitAndClick(dialogSubmitButtonElement);
     }
 }

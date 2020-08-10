@@ -1,35 +1,33 @@
 package steps;
 
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.When;
 import org.testng.Assert;
-import poms.FeePom;
+import poms.TablePOM;
 
-import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Map;
 
 public class _05_FeeSteps {
-    private FeePom fee = new FeePom();
+    private TablePOM fee = new TablePOM();
 
     @When("^I create fee with name \"([^\"]*)\", code \"([^\"]*)\", integration code \"([^\"]*)\" and priority \"([^\"]*)\"$")
     public void i_create_fee_with_name_code_integration_code_and_priority(String name, String code, String intCode, String priority) {
-        fee.waitAndClick(fee.createButtonLocator);
-        fee.waitAndSendKeys(fee.nameInputLocator, name);
+        fee.waitAndClick(fee.createButtonElement);
+        fee.waitAndSendKeys(fee.nameInputElement, name);
         fee.waitAndSendKeys(fee.codeInputElement, code);
-        fee.waitAndSendKeys(fee.intInputElement, intCode);
+        fee.waitAndSendKeys(fee.intCodeInputElement, intCode);
         fee.waitAndSendKeys(fee.priorityElement, priority);
-        fee.waitAndClick(fee.saveButtonLocator);
+        fee.waitAndClick(fee.saveButtonElement);
     }
 
     @When("^I edit  \"([^\"]*)\" to \"([^\"]*)\" fee$")
     public void iEditToFee(String oldName, String newName) throws Throwable {
         fee.searchFor(oldName);
 
-        fee.waitAndClick(fee.editButtonLocator);
-        fee.waitAndSendKeys(fee.nameInputLocator, newName);
-        fee.waitAndClick(fee.saveButtonLocator);
+        fee.waitAndClick(fee.editButtonElement);
+        fee.waitAndSendKeys(fee.nameInputElement, newName);
+        fee.waitAndClick(fee.saveButtonElement);
     }
 
     @When("^I delete \"([^\"]*)\" fee$")
@@ -37,45 +35,45 @@ public class _05_FeeSteps {
         fee.searchFor(name);
 
         fee.waitAndClick(fee.deleteButtonLocator);
-        fee.waitAndClick(fee.dialogSubmitButtonLocator);
+        fee.waitAndClick(fee.dialogSubmitButtonElement);
     }
 
     @When("^I create fee following fields$")
     public void iCreateFeeFollowingFields(DataTable fields) {
         Map<String, String> fieldsMap = fields.asMap(String.class, String.class);
-        fee.waitAndClick(fee.createButtonLocator);
-        fee.waitAndSendKeys(fee.nameInputLocator, fieldsMap.get("name"));
+        fee.waitAndClick(fee.createButtonElement);
+        fee.waitAndSendKeys(fee.nameInputElement, fieldsMap.get("name"));
         fee.waitAndSendKeys(fee.codeInputElement, fieldsMap.get("code"));
-        fee.waitAndSendKeys(fee.intInputElement, fieldsMap.get("intCode"));
+        fee.waitAndSendKeys(fee.intCodeInputElement, fieldsMap.get("intCode"));
         fee.waitAndSendKeys(fee.priorityElement, fieldsMap.get("priority"));
-        fee.waitAndClick(fee.saveButtonLocator);
+        fee.waitAndClick(fee.saveButtonElement);
     }
 
     @When("^I create fee following arbitrary fields$")
     public void iCreateFeeFollowingArbitraryFields(DataTable fields) {
         Map<String, String> fieldsMap = fields.asMap(String.class, String.class);
-        fee.waitAndClick(fee.createButtonLocator);
+        fee.waitAndClick(fee.createButtonElement);
         for (String field : fieldsMap.keySet()) {
             fee.sendKeysToField(field, fieldsMap.get(field));
         }
-        fee.waitAndClick(fee.saveButtonLocator);
+        fee.waitAndClick(fee.saveButtonElement);
     }
 
     @When("^I try to fill in fee with following data$")
     public void iCreateFeeFollowingData(DataTable fields) {
-        fee.waitAndClick(fee.createButtonLocator);
+        fee.waitAndClick(fee.createButtonElement);
         List<Map<String, String>> maps = fields.asMaps(String.class, String.class);
         for (Map<String, String> fieldMap : maps) {
-            fee.waitAndSendKeys(fee.nameInputLocator, fieldMap.get("name"));
+            fee.waitAndSendKeys(fee.nameInputElement, fieldMap.get("name"));
             fee.waitAndSendKeys(fee.codeInputElement, fieldMap.get("code"));
-            fee.waitAndSendKeys(fee.intInputElement, fieldMap.get("intCode"));
+            fee.waitAndSendKeys(fee.intCodeInputElement, fieldMap.get("intCode"));
             fee.waitAndSendKeys(fee.priorityElement, fieldMap.get("priority"));
 
             boolean errorExists = fee.findErrorIn(fieldMap.get("errorIn"));
             Assert.assertEquals(errorExists, !fieldMap.get("errorIn").isEmpty(), "Expected error in " + fieldMap.get("errorIn") + " to exist!");
 
         }
-//        fee.waitAndClick(fee.saveButtonLocator);
+//        fee.waitAndClick(fee.saveButtonElement);
 
     }
 
