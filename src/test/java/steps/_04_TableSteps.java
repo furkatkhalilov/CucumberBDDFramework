@@ -1,17 +1,21 @@
 package steps;
 
+import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.testng.Assert;
 import poms.MenuPOM;
 import poms.TablePOM;
+
+import java.util.Map;
 
 public class _04_TableSteps {
     TablePOM page = new TablePOM();
 
     @Given("^I navigate to \"([^\"]*)\" screen$")
-    public void     i_navigate_to_country_screen(String screenName) {
+    public void i_navigate_to_country_screen(String screenName) {
         MenuPOM menu = new MenuPOM();
         menu.waitAndClick(menu.setupMenuLocator);
         menu.waitAndClick(menu.parametersMenuLocator);
@@ -28,9 +32,11 @@ public class _04_TableSteps {
             case "discount":
                 menu.waitAndClick(menu.discountMenuLocator);
                 break;
-                case "nationality":
+            case "nationality":
                 menu.waitAndClick(menu.nationalityMenuLocator);
                 break;
+            default:
+                Assert.fail(screenName + " menu is not implement!");
         }
         page.waitForTableNotToBeEmpty();
     }
@@ -61,8 +67,44 @@ public class _04_TableSteps {
     }
 
     @Then("^\"([^\"]*)\" is successfully \"([^\"]*)\" message is present$")
-    public void isSuccessfullyMessageIsPresent(String entityName, String outcome){
+    public void isSuccessfullyMessageIsPresent(String entityName, String outcome) {
         boolean messageIsPresent = page.verifyElementsContain(page.alertDialogLocator, entityName + " successfully " + outcome);
-        Assert.assertTrue(messageIsPresent, "Message: '" + entityName + " successfully " + outcome +"' should be present on the page!");
+        Assert.assertTrue(messageIsPresent, "Message: '" + entityName + " successfully " + outcome + "' should be present on the page!");
+    }
+
+    @When("^I create table entity with following arbitrary fields$")
+    public void iCreateTableEntityFollowingArbitraryFields(DataTable fieldsTable) {
+        Map<String, String> fieldsMap = fieldsTable.asMap(String.class, String.class);
+        page.waitAndClick(page.createButtonElement);
+        for (String field : fieldsMap.keySet()) {
+            page.sendKeysToField(field, fieldsMap.get(field));
+        }
+        page.waitAndClick(page.saveButtonElement);
+    }
+
+    @When("^I search table entity with following arbitrary fields$")
+    public void iSearchTableEntityWithFollowingArbitraryFields(DataTable fieldsTable) {
+        Map<String, String> fieldsMap = fieldsTable.asMap(String.class, String.class);
+        for (String field : fieldsMap.keySet()) {
+            page.sendKeysToSearchField(field, fieldsMap.get(field));
+        }
+        page.waitAndClick(page.searchButtonElement);
+
+    }
+
+    @When("^I edit first table entity with following arbitrary fields$")
+    public void iEditFirstTableEntityWithFollowingArbitraryFields(DataTable fieldsTable) {
+        Map<String, String> fieldsMap = fieldsTable.asMap(String.class, String.class);
+        page.waitAndClick(page.editButtonElement);
+        for (String field : fieldsMap.keySet()) {
+            page.sendKeysToField(field, fieldsMap.get(field));
+        }
+        page.waitAndClick(page.saveButtonElement);
+    }
+
+    @When("^I delete first table entity$")
+    public void iDeleteFirstTableEntity() {
+        page.waitAndClick(page.deleteButtonLocator);
+        page.waitAndClick(page.dialogSubmitButtonElement);
     }
 }

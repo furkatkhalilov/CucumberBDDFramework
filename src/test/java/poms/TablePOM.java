@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -98,6 +99,12 @@ public class TablePOM extends BasePOM {
     }
 
     public void searchFor(String entity, String field) {
+        waitAndSendKeys(getSearchFieldElement(field), entity);
+        waitAndClick(searchButtonElement);
+        waitForProgressBar();
+    }
+
+    public WebElement getSearchFieldElement(String field) {
         WebElement element = null;
         switch (field) {
             case "name":
@@ -109,10 +116,15 @@ public class TablePOM extends BasePOM {
             case "code":
                 element = codeSearchElement;
                 break;
+            default:
+                Assert.fail(field + " not implemented for search fields");
         }
-        waitAndSendKeys(element, entity);
-        waitAndClick(searchButtonElement);
-        waitForProgressBar();
+        return element;
+    }
+
+    public void sendKeysToSearchField(String field, String value){
+        WebElement searchFieldElement = getSearchFieldElement(field);
+        waitAndSendKeys(searchFieldElement, value);
     }
 
     public void waitForTableNotToBeEmpty() {
