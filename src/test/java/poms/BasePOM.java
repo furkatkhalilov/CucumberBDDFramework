@@ -1,9 +1,7 @@
 package poms;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.BaseDriver;
@@ -78,5 +76,10 @@ public class BasePOM {
 
     public Integer getNumberOfElements(By locator) {
         return driver.findElements(locator).size();
+    }
+
+    public void pressTabKey() {
+        Actions build = new Actions(driver);
+        build.sendKeys(Keys.TAB).build().perform();
     }
 }

@@ -5,6 +5,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import poms.MenuPOM;
 import poms.TablePOM;
@@ -115,8 +116,21 @@ public class _04_TableSteps {
     @Given("^I click on following elements$")
     public void iClickOnFollowingElements(DataTable elementsTable) {
         List<String> elements = elementsTable.asList(String.class);
-        for(String element: elements) {
-            page.waitAndClick(element); //createButton
+        for (String element : elements) {
+            page.waitAndClick(element);
+        }
+    }
+
+    @And("^I press TAB Key$")
+    public void iPressTABKey() {
+        page.pressTabKey();
+    }
+
+    @Given("^I enter text to following elements$")
+    public void iEnterTextToFollowingElements(DataTable elementsTable) {
+        Map<String, String> fieldsMap = elementsTable.asMap(String.class, String.class);
+        for (String field : fieldsMap.keySet()) {
+            page.sendKeysToField(field, fieldsMap.get(field));
         }
     }
 }

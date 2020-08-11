@@ -1,7 +1,10 @@
 package poms;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,6 +13,7 @@ import org.testng.Assert;
 import java.util.List;
 
 public class TablePOM extends BasePOM {
+
 
     public TablePOM() {
         PageFactory.initElements(driver, this);
@@ -37,11 +41,10 @@ public class TablePOM extends BasePOM {
     @FindBy(css = "ms-browse-table tbody > tr")
     public List<WebElement> rowElement;
     public By rowLocator = By.cssSelector("ms-browse-table tbody > tr");
-    @FindBy(css = "[formcontrolname=\"description\"] > input")
+    @FindBy(css = "[formcontrolname=\"description\"]")
     public WebElement descInputElement;
     @FindBy(css = "[formcontrolname*=\"priority\"] > input")
     public WebElement priorityElement;
-
     @FindBy(css = "[formcontrolname=\"code\"] > input")
     public WebElement codeInputElement;
     @FindBy(css = "[placeholder*=\"INTEGRATION_CODE\"] > input")
@@ -49,25 +52,16 @@ public class TablePOM extends BasePOM {
     public By deleteButtonLocator = By.cssSelector("ms-delete-button > button");
     @FindBy(css = "mat-dialog-actions button[type='submit']")
     public WebElement dialogSubmitButtonElement;
+    @FindBy(css = "mat-select[formcontrolname=\"attachmentStages\"]")
+    private WebElement attachmentStagesSelectElement;
+    @FindBy(css = ".mat-select-panel mat-option")
+    private List<WebElement> listOfSelectOptions;
+    @FindBy(css = "mat-slide-toggle[formcontrolname=\"useCamera\"]")
+    private WebElement useCameraToggleElement;
 
     public void sendKeysToField(String field, String value) {
-        switch (field) {
-            case "name":
-                waitAndSendKeys(nameInputElement, value);
-                break;
-            case "code":
-                waitAndSendKeys(codeInputElement, value);
-                break;
-            case "intCode":
-                waitAndSendKeys(intCodeInputElement, value);
-                break;
-            case "priority":
-                waitAndSendKeys(priorityElement, value);
-                break;
-            case "description":
-                waitAndSendKeys(descInputElement, value);
-                break;
-        }
+        WebElement fieldElement = getFieldElement(field);
+        waitAndSendKeys(fieldElement, value);
     }
 
     public boolean findErrorIn(String errorIn) {
@@ -122,9 +116,15 @@ public class TablePOM extends BasePOM {
         return element;
     }
 
-    public WebElement getFieldElement(String field) { //createButton
+    public WebElement getFieldElement(String field) {
         WebElement element = null;
         switch (field) {
+            case "intCode":
+                element = intCodeInputElement;
+                break;
+            case "priority":
+                element = priorityElement;
+                break;
             case "name":
                 element = nameInputElement;
                 break;
@@ -137,13 +137,25 @@ public class TablePOM extends BasePOM {
             case "createButton":
                 element = createButtonElement;
                 break;
+            case "attachmentStagesSelect":
+                element = attachmentStagesSelectElement;
+                break;
+            case "Option1":
+                element = listOfSelectOptions.get(0);
+                break;
+            case "Option2":
+                element = listOfSelectOptions.get(1);
+                break;
+            case "useCameraToggle":
+                element = useCameraToggleElement;
+                break;
             default:
                 Assert.fail(field + " not implemented for search fields");
         }
         return element;
     }
 
-    public void sendKeysToSearchField(String field, String value){
+    public void sendKeysToSearchField(String field, String value) {
         WebElement searchFieldElement = getSearchFieldElement(field);
         waitAndSendKeys(searchFieldElement, value);
     }
@@ -174,8 +186,9 @@ public class TablePOM extends BasePOM {
     }
 
     public void waitAndClick(String element) {
-        WebElement fieldElement = getFieldElement(element); //createButton
+        WebElement fieldElement = getFieldElement(element); //attachmentStagesSelect
         wait.until(ExpectedConditions.visibilityOf(fieldElement));
         fieldElement.click();
     }
+
 }

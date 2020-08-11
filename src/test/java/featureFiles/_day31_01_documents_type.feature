@@ -7,11 +7,13 @@ Feature: Full Document Types feature test
     Given I navigate to "document types" screen
     Given I click on following elements
       | createButton     |
-#      | stageButton      |
-#      | dialogBoxHeader  |
-#      | requiredCheckbox |
-#    Given I enter text to following elements
-#      | name | Brazilia document1      |
-#      | desc | Brazilia document1 desc |
+      | attachmentStagesSelect |
+      | Option2 |
+    And I press TAB Key
+    Given I click on following elements
+      | useCameraToggle |
+    Given I enter text to following elements
+      | name | Brazilia document1      |
+      | description | Brazilia document1 desc |
 #    Given I click on following elements
 #      | saveButton |
