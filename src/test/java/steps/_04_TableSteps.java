@@ -9,6 +9,7 @@ import org.testng.Assert;
 import poms.MenuPOM;
 import poms.TablePOM;
 
+import java.util.List;
 import java.util.Map;
 
 public class _04_TableSteps {
@@ -109,5 +110,13 @@ public class _04_TableSteps {
     public void iDeleteFirstTableEntity() {
         page.waitAndClick(page.deleteButtonLocator);
         page.waitAndClick(page.dialogSubmitButtonElement);
+    }
+
+    @Given("^I click on following elements$")
+    public void iClickOnFollowingElements(DataTable elementsTable) {
+        List<String> elements = elementsTable.asList(String.class);
+        for(String element: elements) {
+            page.waitAndClick(element); //createButton
+        }
     }
 }

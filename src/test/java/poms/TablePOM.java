@@ -122,6 +122,27 @@ public class TablePOM extends BasePOM {
         return element;
     }
 
+    public WebElement getFieldElement(String field) { //createButton
+        WebElement element = null;
+        switch (field) {
+            case "name":
+                element = nameInputElement;
+                break;
+            case "description":
+                element = descInputElement;
+                break;
+            case "code":
+                element = codeInputElement;
+                break;
+            case "createButton":
+                element = createButtonElement;
+                break;
+            default:
+                Assert.fail(field + " not implemented for search fields");
+        }
+        return element;
+    }
+
     public void sendKeysToSearchField(String field, String value){
         WebElement searchFieldElement = getSearchFieldElement(field);
         waitAndSendKeys(searchFieldElement, value);
@@ -150,5 +171,11 @@ public class TablePOM extends BasePOM {
         List<WebElement> elements = rowElement;
         elements.get(0).findElement(deleteButtonLocator).click();
         waitAndClick(dialogSubmitButtonElement);
+    }
+
+    public void waitAndClick(String element) {
+        WebElement fieldElement = getFieldElement(element); //createButton
+        wait.until(ExpectedConditions.visibilityOf(fieldElement));
+        fieldElement.click();
     }
 }
