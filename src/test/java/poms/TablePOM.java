@@ -137,6 +137,9 @@ public class TablePOM extends BasePOM {
             case "createButton":
                 element = createButtonElement;
                 break;
+            case "editButton":
+                element = editButtonElement;
+                break;
             case "attachmentStagesSelect":
                 element = attachmentStagesSelectElement;
                 break;
