@@ -11,5 +11,5 @@ public class MenuPOM extends BasePOM {
     public By feeMenuLocator = By.xpath("//span[text()='Fees']");
     public By discountMenuLocator = By.xpath("//span[text()='Discounts']");
     public By nationalityMenuLocator = By.xpath("//span[text()='Nationalities']");
-
+    public By documentMenuLocator = By.xpath("//span[text()='Document Types']");
 }

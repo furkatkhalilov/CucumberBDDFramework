@@ -35,6 +35,9 @@ public class _04_TableSteps {
             case "nationality":
                 menu.waitAndClick(menu.nationalityMenuLocator);
                 break;
+            case "document types":
+                menu.waitAndClick(menu.documentMenuLocator);
+                break;
             default:
                 Assert.fail(screenName + " menu is not implement!");
         }
