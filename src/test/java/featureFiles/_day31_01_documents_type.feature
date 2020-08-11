@@ -19,7 +19,7 @@ Feature: Full Document Types feature test
       | description | Brazilia document1 desc |
     Given I click on following elements
       | saveButton |
-    Then "Document Type" is successfully "created"
+    Then "Document" is successfully "created"
 
   Scenario: Successful Document Type editing in basqar
     When I search table entity with following arbitrary fields
@@ -36,4 +36,4 @@ Feature: Full Document Types feature test
       | description | Almania document1 desc |
     Given I click on following elements
       | saveButton |
-    Then "Document Type" is successfully "updated"
+    Then "Document" is successfully "updated"
