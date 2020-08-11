@@ -15,5 +15,6 @@ Feature: Full Document Types feature test
     Given I enter text to following elements
       | name | Brazilia document1      |
       | description | Brazilia document1 desc |
-#    Given I click on following elements
-#      | saveButton |
+    Given I click on following elements
+      | saveButton |
+    Then "Document Type" is successfully "created"
