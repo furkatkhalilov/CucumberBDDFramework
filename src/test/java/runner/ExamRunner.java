@@ -11,6 +11,7 @@ import utils.BaseDriver;
         features = {
                 "src/test/java/featureFiles/_day32_01_examination.feature"
         },
+        tags = "@EditAndDelete",
         glue = {"steps"} // tell cucumber where to look for step definitions
 )
 public class ExamRunner extends AbstractTestNGCucumberTests {

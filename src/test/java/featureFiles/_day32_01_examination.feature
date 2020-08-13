@@ -22,24 +22,23 @@ Feature: Full Exam feature test
       | saveButton |
     Then "Exam" is successfully "created"
 
-#  @EditAndDelete
-#  Scenario: Successful Exam editing in basqar
-#    When I search table entity with following arbitrary fields
-#      | name | Brazilia document1 |
-#    Given I click on following elements
-#      | editButton             |
-#      | attachmentStagesSelect |
-#      | Option1                |
-#    And I press TAB Key
-#    Given I click on following elements
-#      | useCameraToggle |
-#    Given I enter text to following elements
-#      | name        | Almania document1      |
-#      | description | Almania document1 desc |
-#    Given I click on following elements
-#      | saveButton |
-#    Then "Document" is successfully "updated"
-#
+  @EditAndDelete
+  Scenario: Successful Exam editing in basqar
+    When I search table entity with following arbitrary fields
+      | examName | Brazilia document1 |
+    Given I click on following elements
+      | editButton |
+    Given I enter text to following elements
+      | name | Almania document1 |
+    Given I click on following elements
+      | academicPeriodSelect |
+      | Option2              |
+      | gradeLevelSelect     |
+      | Option1              |
+    Given I click on following elements
+      | saveButton |
+    Then "Exam" is successfully "updated"
+
 #  @EditAndDelete
 #  Scenario: Successful Exam deletion in basqar
 #    When I search table entity with following arbitrary fields

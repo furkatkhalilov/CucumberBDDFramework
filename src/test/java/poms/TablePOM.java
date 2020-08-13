@@ -34,6 +34,8 @@ public class TablePOM extends BasePOM {
     public By alertDialogLocator = By.cssSelector("div[role='alertdialog']");
     @FindBy(css = "ms-text-field[placeholder='GENERAL.FIELD.NAME'] > input")
     public WebElement nameSearchElement;
+    @FindBy(css = "input[data-placeholder=\"Name\"]")
+    public WebElement examNameSearchElement;
     @FindBy(css = "ms-text-field[placeholder*='DESCRIPTION'] > input")
     public WebElement descSearchElement;
     @FindBy(css = "ms-text-field[placeholder*='FIELD.CODE'] > input")
@@ -108,6 +110,9 @@ public class TablePOM extends BasePOM {
         switch (field) {
             case "name":
                 element = nameSearchElement;
+                break;
+            case "examName":
+                element = examNameSearchElement;
                 break;
             case "description":
                 element = descSearchElement;
