@@ -40,7 +40,6 @@ public class TablePOM extends BasePOM {
     public WebElement codeSearchElement;
     @FindBy(css = "ms-browse-table tbody > tr")
     public List<WebElement> rowElement;
-    public By rowLocator = By.cssSelector("ms-browse-table tbody > tr");
     @FindBy(css = "[formcontrolname=\"description\"]")
     public WebElement descInputElement;
     @FindBy(css = "[formcontrolname*=\"priority\"] > input")
@@ -54,6 +53,12 @@ public class TablePOM extends BasePOM {
     public WebElement dialogSubmitButtonElement;
     @FindBy(css = "mat-select[formcontrolname=\"attachmentStages\"]")
     private WebElement attachmentStagesSelectElement;
+
+    @FindBy(css = "mat-select[aria-label=\"Academic Period\"]")
+    private WebElement academicPeriodSelectElement;
+    @FindBy(css = "mat-select[aria-label=\"Grade Level\"]")
+    private WebElement gradeLevelSelectElement;
+
     @FindBy(css = ".mat-select-panel mat-option")
     private List<WebElement> listOfSelectOptions;
     @FindBy(css = "mat-slide-toggle[formcontrolname=\"useCamera\"]")
@@ -146,6 +151,12 @@ public class TablePOM extends BasePOM {
             case "attachmentStagesSelect":
                 element = attachmentStagesSelectElement;
                 break;
+            case "academicPeriodSelect":
+                element = academicPeriodSelectElement;
+                break;
+            case "gradeLevelSelect":
+                element = gradeLevelSelectElement;
+                break;
             case "Option1":
                 element = listOfSelectOptions.get(0);
                 break;
@@ -166,14 +177,7 @@ public class TablePOM extends BasePOM {
         waitAndSendKeys(searchFieldElement, value);
     }
 
-    public void waitForTableNotToBeEmpty() {
-        try {
-            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(rowLocator, 0));
-            // TODO: to use webelement to check for numberOfElementsToBeMoreThan condition
-        } catch (Exception e) {
-            System.out.println("The table is empty, nevermind!");
-        }
-    }
+
 
     public void deleteAllElementsFromTable() {
         List<WebElement> elements = rowElement;
@@ -194,6 +198,7 @@ public class TablePOM extends BasePOM {
     public void waitAndClick(String element) {
         WebElement fieldElement = getFieldElement(element); //attachmentStagesSelect
         wait.until(ExpectedConditions.visibilityOf(fieldElement));
+        wait.until(ExpectedConditions.elementToBeClickable(fieldElement));
         fieldElement.click();
     }
 

@@ -13,6 +13,7 @@ public class BasePOM {
     protected WebDriver driver;
 
     public By progressBarLocator = By.tagName("mat-progress-bar");
+    public By rowLocator = By.cssSelector("ms-browse-table tbody > tr");
 
 
     public BasePOM() {
@@ -81,5 +82,14 @@ public class BasePOM {
     public void pressTabKey() {
         Actions build = new Actions(driver);
         build.sendKeys(Keys.TAB).build().perform();
+    }
+
+    public void waitForTableNotToBeEmpty() {
+        try {
+            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(rowLocator, 0));
+            // TODO: to use webelement to check for numberOfElementsToBeMoreThan condition
+        } catch (Exception e) {
+            System.out.println("The table is empty, nevermind!");
+        }
     }
 }

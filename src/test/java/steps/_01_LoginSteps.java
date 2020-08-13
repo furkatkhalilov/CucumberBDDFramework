@@ -31,4 +31,5 @@ public class _01_LoginSteps {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("img.avatar")));
     }
 
+
 }
