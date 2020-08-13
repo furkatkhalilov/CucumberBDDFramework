@@ -1,5 +1,6 @@
 Feature: Full country feature test
 
+  @Regression
   Scenario: Successful country creating in basqar
     Given I navigate to basqar
     When I try to login using username and password
