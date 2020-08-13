@@ -1,3 +1,4 @@
+@AllDocumentTypeScenarios
 Feature: Full Document Types feature test
 
   Background:
@@ -21,6 +22,7 @@ Feature: Full Document Types feature test
       | saveButton |
     Then "Document" is successfully "created"
 
+  @EditAndDelete
   Scenario: Successful Document Type editing in basqar
     When I search table entity with following arbitrary fields
       | name | Brazilia document1 |
@@ -38,6 +40,7 @@ Feature: Full Document Types feature test
       | saveButton |
     Then "Document" is successfully "updated"
 
+  @EditAndDelete
   Scenario: Successful Document Type deletion in basqar
     When I search table entity with following arbitrary fields
       | name | Almania document1 |
