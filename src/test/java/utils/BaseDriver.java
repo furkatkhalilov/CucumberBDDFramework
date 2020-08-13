@@ -15,4 +15,10 @@ public class BaseDriver {
         return driver;
     }
 
+    public static void quitDriver() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
+    }
 }

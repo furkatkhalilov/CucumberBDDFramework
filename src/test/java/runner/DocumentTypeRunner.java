@@ -4,6 +4,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import utils.BaseDriver;
 
 @CucumberOptions(
         plugin = {"html:target/cucumber-report"},
@@ -22,6 +23,6 @@ public class DocumentTypeRunner extends AbstractTestNGCucumberTests {
     @AfterSuite
     public void afterSuite() {
         System.out.println("Ending suite!");
-        // quit the driver
+        BaseDriver.quitDriver();
     }
 }
