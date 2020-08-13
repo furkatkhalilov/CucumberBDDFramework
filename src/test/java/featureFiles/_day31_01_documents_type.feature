@@ -23,9 +23,9 @@ Feature: Full Document Types feature test
 
   Scenario: Successful Document Type editing in basqar
     When I search table entity with following arbitrary fields
-      | name     | Brazilia document1 |
+      | name | Brazilia document1 |
     Given I click on following elements
-      | editButton           |
+      | editButton             |
       | attachmentStagesSelect |
       | Option1                |
     And I press TAB Key
@@ -37,3 +37,10 @@ Feature: Full Document Types feature test
     Given I click on following elements
       | saveButton |
     Then "Document" is successfully "updated"
+
+  Scenario: Successful Document Type deletion in basqar
+    When I search table entity with following arbitrary fields
+      | name | Almania document1 |
+    When I delete first table entity
+    Then "Document" is successfully "deleted"
+    Then table doesn't contain the entity by name "Almania document1"
