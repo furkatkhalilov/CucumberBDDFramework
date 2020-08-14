@@ -9,22 +9,18 @@ import org.testng.annotations.BeforeSuite;
 import utils.BaseDriver;
 
 @CucumberOptions(
-        plugin = {"html:target/cucumber-report"},
-        features = {
-                "src/test/java/featureFiles/_day32_01_examination.feature"
+        plugin = {
+                "html:target/cucumber-report",
+                "com.cucumber.listener.ExtentCucumberFormatter:target/extent_report/index.html" // extent report plugin
         },
-        tags = "@EditAndDelete",
+        features = {
+                "src/test/java/featureFiles/_day26_01_country_with_extra.feature"
+        },
         glue = {"steps"} // tell cucumber where to look for step definitions
 )
-public class ExamRunner extends AbstractTestNGCucumberTests {
-    @BeforeSuite
-    public void beforeSuite() {
-        System.out.println("Starting suite!");
-    }
-
+public class CountryTestRunner extends AbstractTestNGCucumberTests {
     @AfterSuite
     public void afterSuite() {
-        System.out.println("Ending suite!");
         BaseDriver.quitDriver();
     }
     @AfterClass

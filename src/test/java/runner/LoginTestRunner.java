@@ -1,7 +1,9 @@
 package runner;
 
+import com.cucumber.listener.Reporter;
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import utils.BaseDriver;
@@ -26,5 +28,9 @@ public class LoginTestRunner extends AbstractTestNGCucumberTests {
     public void afterSuite() {
         System.out.println("Ending suite!");
         BaseDriver.quitDriver();
+    }
+    @AfterClass
+    public void configReport(){
+        Reporter.loadXMLConfig("src/test/java/runner/reportConfig/report.xml");
     }
 }
