@@ -8,7 +8,7 @@
         </classes>
     </test>
     <test name="country test">
-        <parameter name="browser" value="chrome"></parameter>
+        <parameter name="browser" value="firefox"></parameter>
         <classes>
             <class name="runner.FeeTestRunner"></class>
         </classes>
