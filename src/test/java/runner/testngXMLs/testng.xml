@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Basqar Suite 1">
+    <test name="login test">
+        <classes>
+            <class name="runner.LoginTestRunner"></class>
+        </classes>
+    </test>
+    <test name="country test">
+        <classes>
+            <class name="runner.CountryTestRunner"></class>
+        </classes>
+    </test>
+</suite>
