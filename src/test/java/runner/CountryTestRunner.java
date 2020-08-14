@@ -3,8 +3,7 @@ package runner;
 import com.cucumber.listener.Reporter;
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterSuite;
+import org.testng.annotations.*;
 import utils.ThreadLocalBaseDriver;
 
 @CucumberOptions(
@@ -18,8 +17,14 @@ import utils.ThreadLocalBaseDriver;
         glue = {"steps"} // tell cucumber where to look for step definitions
 )
 public class CountryTestRunner extends AbstractTestNGCucumberTests {
-    @AfterSuite
-    public void afterSuite() {
+    @Parameters("browser")
+    @BeforeClass
+    public void configureBrowser(@Optional("chrome") String browser) {
+        ThreadLocalBaseDriver.setBrowser(browser);
+    }
+
+    @AfterClass
+    public void quiteDriver() {
         ThreadLocalBaseDriver.quitDriver();
     }
     @AfterClass
