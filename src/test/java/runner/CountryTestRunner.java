@@ -26,5 +26,10 @@ public class CountryTestRunner extends AbstractTestNGCucumberTests {
     @AfterClass
     public void configReport(){
         Reporter.loadXMLConfig("src/test/java/runner/reportConfig/report.xml");
+        Reporter.setSystemInfo("Author", "Mersys");
+        Reporter.setSystemInfo("Application name", "Basqar");
+        Reporter.setSystemInfo("Operating System", System.getProperty("os.name"));
+        Reporter.setSystemInfo("Environment", "test");
+
     }
 }
