@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.BaseDriver;
+import utils.ThreadLocalBaseDriver;
 
 public class _01_LoginSteps {
 
@@ -13,7 +13,7 @@ public class _01_LoginSteps {
 
     @Given("^I navigate to basqar$")
     public void i_navigate_to_basqar() {
-        driver = BaseDriver.getDriver();
+        driver = ThreadLocalBaseDriver.getDriver();
         driver.manage().window().maximize();
         driver.get("https://test.basqar.techno.study/");
     }

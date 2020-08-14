@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import utils.BaseDriver;
+import utils.ThreadLocalBaseDriver;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +17,7 @@ public class AutomationPracticeSteps {
 
     @Given("^I navigate to \"([^\"]*)\"$")
     public void navigate(String websiteUrl) {
-        driver = BaseDriver.getDriver();
+        driver = ThreadLocalBaseDriver.getDriver();
         driver.manage().window().maximize();
         driver.get(websiteUrl);
     }

@@ -5,7 +5,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
-import utils.BaseDriver;
+import utils.ThreadLocalBaseDriver;
 
 @CucumberOptions(
         plugin = {
@@ -23,7 +23,7 @@ import utils.BaseDriver;
 public class MixedTestRunner extends AbstractTestNGCucumberTests {
     @AfterSuite
     public void afterSuite() {
-        BaseDriver.quitDriver();
+        ThreadLocalBaseDriver.quitDriver();
     }
     @AfterClass
     public void configReport(){

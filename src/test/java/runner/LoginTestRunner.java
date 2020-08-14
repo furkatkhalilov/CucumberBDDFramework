@@ -6,7 +6,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import utils.BaseDriver;
+import utils.ThreadLocalBaseDriver;
 
 @CucumberOptions(
         plugin = {
@@ -27,7 +27,7 @@ public class LoginTestRunner extends AbstractTestNGCucumberTests {
     @AfterSuite
     public void afterSuite() {
         System.out.println("Ending suite!");
-        BaseDriver.quitDriver();
+        ThreadLocalBaseDriver.quitDriver();
     }
     @AfterClass
     public void configReport(){

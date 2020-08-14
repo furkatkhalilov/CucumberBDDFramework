@@ -6,7 +6,7 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import utils.BaseDriver;
+import utils.ThreadLocalBaseDriver;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class BeforeAndAfterDefinition {
     public void after(Scenario scenario) throws IOException {
         System.out.println("After scenario: " + scenario.getName());
         if (scenario.isFailed()) {
-            File sourcePath = ((TakesScreenshot) BaseDriver.getDriver()).getScreenshotAs(OutputType.FILE);
+            File sourcePath = ((TakesScreenshot) ThreadLocalBaseDriver.getDriver()).getScreenshotAs(OutputType.FILE);
             File destinationPath = new File(System.getProperty("user.dir") + "/target/extent_report/screenshots/" + scenario.getName() + ".png");
             copyFile(sourcePath, destinationPath);
 

@@ -4,7 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.BaseDriver;
+import utils.ThreadLocalBaseDriver;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class BasePOM {
 
 
     public BasePOM() {
-        driver = BaseDriver.getDriver();
+        driver = ThreadLocalBaseDriver.getDriver();
         wait = new WebDriverWait(driver, 10);
     }
 
