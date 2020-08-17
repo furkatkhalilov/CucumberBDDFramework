@@ -65,4 +65,33 @@ public class ExcelSteps {
         }
         System.out.println(listOfLists);
     }
+
+    @Given("^I printout to console from excel using list of maps$")
+    public void iPrintoutToConsoleFromExcelUsingListOfMaps() throws IOException {
+        List<Map<String,String>>  listOfMaps = new ArrayList<>();
+
+        File file = new File("src/main/resources/data.xlsx");
+        Workbook workbook = WorkbookFactory.create(file);
+
+        Sheet listMap = workbook.getSheet("listMap");
+        Row fieldRow = listMap.getRow(0);
+        List<String> fieldNames = new ArrayList<>();
+        for (int i = 0; i < fieldRow.getPhysicalNumberOfCells(); i++) {
+            fieldNames.add(fieldRow.getCell(i).toString());
+        }
+
+        for (int i = 1; i < listMap.getPhysicalNumberOfRows(); i++) {
+            Row dataRow = listMap.getRow(i);
+            Map<String, String> rowMap =  new HashMap<>();
+            for (int j = 0; j < dataRow.getPhysicalNumberOfCells(); j++) {
+                String key = fieldNames.get(j);
+                String value = dataRow.getCell(j).toString();
+                rowMap.put(key, value);
+            }
+
+            listOfMaps.add(rowMap);
+        }
+
+        System.out.println(listOfMaps);
+    }
 }
