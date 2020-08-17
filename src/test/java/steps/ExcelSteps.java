@@ -45,4 +45,24 @@ public class ExcelSteps {
         }
         System.out.println(map);
     }
+
+    @Given("^I printout to console from excel using list of lists$")
+    public void iPrintoutToConsoleFromExcelUsingListOfLists() throws IOException {
+        List<List<String>> listOfLists = new ArrayList<>();
+
+        File file = new File("src/main/resources/data.xlsx");
+        Workbook workbook = WorkbookFactory.create(file);
+
+        Sheet sheet = workbook.getSheet("listList");
+        for (int i = 0; i < sheet.getPhysicalNumberOfRows(); i++) {
+            List<String> rowList = new ArrayList<>(); // create empty list for each row
+            Row row = sheet.getRow(i); // get reference to
+            for (int j = 0; j < row.getPhysicalNumberOfCells(); j++) {
+                rowList.add(row.getCell(j).toString()); // add cell to rowList
+            }
+            // finished reading the row into a rowList
+            listOfLists.add(rowList); // add rowList to list of lists
+        }
+        System.out.println(listOfLists);
+    }
 }
