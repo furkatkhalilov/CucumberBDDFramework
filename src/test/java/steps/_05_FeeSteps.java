@@ -1,10 +1,15 @@
 package steps;
 
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.When;
+import org.apache.poi.ss.usermodel.*;
 import org.testng.Assert;
 import poms.TablePOM;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -78,4 +83,27 @@ public class _05_FeeSteps {
     }
 
 
+    @When("^I create fee with fields from excel sheet \"([^\"]*)\" as a \"([^\"]*)\"$")
+    public void iCreateFeeWithFieldsFromExcelSheetAsA(String sheetName, String docType) throws IOException {
+        Map<String,String> map = new HashMap<>();
+
+        File file = new File("src/test/resources/fee_scenarios.xlsx");
+        Workbook workbook = WorkbookFactory.create(file);
+
+        Sheet sheet = workbook.getSheet(sheetName);
+        for (int i = 0; i < sheet.getPhysicalNumberOfRows(); i++) {
+            Row row = sheet.getRow(i); // get reference to
+            Cell cell0 = row.getCell(0);
+            Cell cell1 = row.getCell(1);
+            map.put(cell0.toString(),cell1.toString()); // key, value
+        }
+        fee.waitAndClick(fee.createButtonElement);
+        fee.waitAndSendKeys(fee.nameInputElement, map.get("name"));
+        fee.waitAndSendKeys(fee.codeInputElement, map.get("code"));
+        fee.waitAndSendKeys(fee.intCodeInputElement, map.get("intCode"));
+//        String priorityString = map.get("priority");  // 17.0
+//        fee.waitAndSendKeys(fee.priorityElement, priorityString.substring(0, priorityString.indexOf('.')));
+        fee.waitAndSendKeys(fee.priorityElement, map.get("priority"));
+        fee.waitAndClick(fee.saveButtonElement);
+    }
 }

@@ -8,7 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class ThreadLocalBaseDriver {
     private static ThreadLocal<WebDriver> webDriverHolder = new ThreadLocal<>();
-    private static String browserName;
+    private static String browserName = "chrome";
 
     // webDriverHolder.get() ==> returns WebDriver inside
     // webDriverHolder.set(WebDriver) ==> will set WebDriver inside
