@@ -101,8 +101,6 @@ public class _05_FeeSteps {
         fee.waitAndSendKeys(fee.nameInputElement, map.get("name"));
         fee.waitAndSendKeys(fee.codeInputElement, map.get("code"));
         fee.waitAndSendKeys(fee.intCodeInputElement, map.get("intCode"));
-//        String priorityString = map.get("priority");  // 17.0
-//        fee.waitAndSendKeys(fee.priorityElement, priorityString.substring(0, priorityString.indexOf('.')));
         fee.waitAndSendKeys(fee.priorityElement, map.get("priority"));
         fee.waitAndClick(fee.saveButtonElement);
     }
