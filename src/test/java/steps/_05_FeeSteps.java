@@ -9,6 +9,7 @@ import poms.TablePOM;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,5 +103,44 @@ public class _05_FeeSteps {
             fee.sendKeysToField(field, map.get(field));
         }
         fee.waitAndClick(fee.saveButtonElement);
+    }
+
+    @When("^I validate fee fields from excel sheet \"([^\"]*)\" as a \"([^\"]*)\"$")
+    public void iValidateFeeFieldsFromExcelSheetAsA(String sheetName, String docType) throws IOException {
+        List<Map<String,String>>  listOfMaps = new ArrayList<>();
+
+        File file = new File("src/test/resources/fee_scenarios.xlsx");
+        Workbook workbook = WorkbookFactory.create(file);
+
+        Sheet listMap = workbook.getSheet(sheetName);
+        Row fieldRow = listMap.getRow(0);
+        List<String> fieldNames = new ArrayList<>();
+        for (int i = 0; i < fieldRow.getPhysicalNumberOfCells(); i++) {
+            fieldNames.add(fieldRow.getCell(i).toString());
+        }
+
+        for (int i = 1; i < listMap.getPhysicalNumberOfRows(); i++) {
+            Row dataRow = listMap.getRow(i);
+            Map<String, String> rowMap =  new HashMap<>();
+            for (int j = 0; j < dataRow.getPhysicalNumberOfCells(); j++) {
+                String key = fieldNames.get(j);
+                String value = dataRow.getCell(j).toString();
+                rowMap.put((key == null) ? "" : key.trim(), (value == null) ? "" : value.trim());
+            }
+
+            listOfMaps.add(rowMap);
+        }
+
+        fee.waitAndClick(fee.createButtonElement);
+        for (Map<String, String> fieldMap : listOfMaps) {
+            fee.waitAndSendKeys(fee.nameInputElement, fieldMap.get("name"));
+            fee.waitAndSendKeys(fee.codeInputElement, fieldMap.get("code"));
+            fee.waitAndSendKeys(fee.intCodeInputElement, fieldMap.get("intCode"));
+            fee.waitAndSendKeys(fee.priorityElement, fieldMap.get("priority"));
+
+            boolean errorExists = fee.findErrorIn(fieldMap.get("errorIn"));
+            Assert.assertEquals(errorExists, !fieldMap.get("errorIn").isEmpty(), "Expected error in " + fieldMap.get("errorIn") + " to exist!");
+
+        }
     }
 }
