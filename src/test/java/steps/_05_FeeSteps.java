@@ -98,10 +98,9 @@ public class _05_FeeSteps {
             map.put(cell0.toString(),cell1.toString()); // key, value
         }
         fee.waitAndClick(fee.createButtonElement);
-        fee.waitAndSendKeys(fee.nameInputElement, map.get("name"));
-        fee.waitAndSendKeys(fee.codeInputElement, map.get("code"));
-        fee.waitAndSendKeys(fee.intCodeInputElement, map.get("intCode"));
-        fee.waitAndSendKeys(fee.priorityElement, map.get("priority"));
+        for (String field : map.keySet()) {
+            fee.sendKeysToField(field, map.get(field));
+        }
         fee.waitAndClick(fee.saveButtonElement);
     }
 }
