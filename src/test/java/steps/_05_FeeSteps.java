@@ -6,6 +6,7 @@ import cucumber.api.java.en.When;
 import org.apache.poi.ss.usermodel.*;
 import org.testng.Assert;
 import poms.TablePOM;
+import utils.ExcelReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -86,18 +87,9 @@ public class _05_FeeSteps {
 
     @When("^I create fee with fields from excel sheet \"([^\"]*)\" as a \"([^\"]*)\"$")
     public void iCreateFeeWithFieldsFromExcelSheetAsA(String sheetName, String docType) throws IOException {
-        Map<String,String> map = new HashMap<>();
+        ExcelReader excelReader=new ExcelReader("src/test/resources/fee_scenarios.xlsx");
+        Map<String, String> map = excelReader.getMap(sheetName);
 
-        File file = new File("src/test/resources/fee_scenarios.xlsx");
-        Workbook workbook = WorkbookFactory.create(file);
-
-        Sheet sheet = workbook.getSheet(sheetName);
-        for (int i = 0; i < sheet.getPhysicalNumberOfRows(); i++) {
-            Row row = sheet.getRow(i); // get reference to
-            Cell cell0 = row.getCell(0);
-            Cell cell1 = row.getCell(1);
-            map.put(cell0.toString(),cell1.toString()); // key, value
-        }
         fee.waitAndClick(fee.createButtonElement);
         for (String field : map.keySet()) {
             fee.sendKeysToField(field, map.get(field));
@@ -107,29 +99,8 @@ public class _05_FeeSteps {
 
     @When("^I validate fee fields from excel sheet \"([^\"]*)\" as a \"([^\"]*)\"$")
     public void iValidateFeeFieldsFromExcelSheetAsA(String sheetName, String docType) throws IOException {
-        List<Map<String,String>>  listOfMaps = new ArrayList<>();
-
-        File file = new File("src/test/resources/fee_scenarios.xlsx");
-        Workbook workbook = WorkbookFactory.create(file);
-
-        Sheet listMap = workbook.getSheet(sheetName);
-        Row fieldRow = listMap.getRow(0);
-        List<String> fieldNames = new ArrayList<>();
-        for (int i = 0; i < fieldRow.getPhysicalNumberOfCells(); i++) {
-            fieldNames.add(fieldRow.getCell(i).toString());
-        }
-
-        for (int i = 1; i < listMap.getPhysicalNumberOfRows(); i++) {
-            Row dataRow = listMap.getRow(i);
-            Map<String, String> rowMap =  new HashMap<>();
-            for (int j = 0; j < dataRow.getPhysicalNumberOfCells(); j++) {
-                String key = fieldNames.get(j);
-                String value = dataRow.getCell(j).toString();
-                rowMap.put((key == null) ? "" : key.trim(), (value == null) ? "" : value.trim());
-            }
-
-            listOfMaps.add(rowMap);
-        }
+        ExcelReader excelReader=new ExcelReader("src/test/resources/fee_scenarios.xlsx");
+        List<Map<String,String>>  listOfMaps = excelReader.getListOfMaps(sheetName);
 
         fee.waitAndClick(fee.createButtonElement);
         for (Map<String, String> fieldMap : listOfMaps) {
