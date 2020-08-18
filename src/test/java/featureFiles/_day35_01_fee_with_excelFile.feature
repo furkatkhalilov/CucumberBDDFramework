@@ -25,5 +25,4 @@ Feature: Full fee feature test
     Then I am logged in
     Given I navigate to "fee" screen
     And search and delete "Brazilia fee1" entities by "name"
-    When I create fee with fields from excel sheet "scenario3" as a "listMap"
-
+    When I validate fee fields from excel sheet "scenario3" as a "listMap"
