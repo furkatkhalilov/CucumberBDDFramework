@@ -40,6 +40,7 @@ public class BasePOM {
 
     public void waitAndSendKeys(WebElement element, String text) {
         WebElement webElement = wait.until(ExpectedConditions.visibilityOf(element));
+        wait.until(ExpectedConditions.elementToBeClickable(webElement));
         webElement.clear();
         webElement.sendKeys(text);
     }
