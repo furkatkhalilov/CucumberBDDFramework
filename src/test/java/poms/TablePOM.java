@@ -42,7 +42,7 @@ public class TablePOM extends BasePOM {
     public WebElement codeSearchElement;
     @FindBy(css = "ms-browse-table tbody > tr")
     public List<WebElement> rowElement;
-    @FindBy(css = "[formcontrolname=\"description\"]")
+    @FindBy(css = "[formcontrolname=\"description\"] > input")
     public WebElement descInputElement;
     @FindBy(css = "[formcontrolname*=\"priority\"] > input")
     public WebElement priorityElement;
