@@ -1,4 +1,5 @@
 package utils;
+
 import org.apache.poi.ss.usermodel.*;
 
 import java.io.*;
@@ -6,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 public class ExcelWriter {
     Workbook workbook = null;
     private String pathToFile;
@@ -21,11 +23,20 @@ public class ExcelWriter {
         }
     }
 
+    public void writeList(List<String> list, String sheetName) throws IOException {
+    }
+
+    public void writeMap(Map<String, String> map, String sheetName) throws IOException {
+    }
+
+    public void writeListOfMaps(List<Map<String, String>> listOfMaps, String sheetName) throws IOException {
+    }
+
     public void writeListOfLists(List<List<String>> rows, String sheetName) throws IOException {
 
         // filling in the data
         Sheet sheet = workbook.getSheet(sheetName);
-        if(sheet == null) { // if sheet does not exist
+        if (sheet == null) { // if sheet does not exist
             sheet = workbook.createSheet(sheetName);
         }
 
@@ -47,4 +58,5 @@ public class ExcelWriter {
         outputStream.close();
 
     }
+
 }
