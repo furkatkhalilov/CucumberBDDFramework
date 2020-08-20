@@ -1,9 +1,12 @@
 package steps;
 
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
+import org.apache.poi.ss.usermodel.*;
 import utils.ExcelReader;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -39,12 +42,28 @@ public class ExcelSteps {
         System.out.println(listOfMaps);
     }
 
-    @Given("^I write to excel following data$")
-    public void iWriteToExcelFollowingData(DataTable table) {
+    @Given("^I write to excel following data to sheet \"([^\"]*)\"$")
+    public void iWriteToExcelFollowingData(String sheetName, DataTable table) throws IOException {
+        // create an new Workbook reference
+        Workbook workbook = WorkbookFactory.create(true);
+
+        // filling in the data
+        Sheet sheet = workbook.createSheet(sheetName);
+
         List<List<String>> rows = table.asLists(String.class); // extract data from datatable as list of lists
-        for(List<String> column: rows) {
-            for (String cell: column) {
+        for (int i = 0; i < rows.size(); i++) {
+            Row row = sheet.createRow(i);
+            List<String> dataTableRow = rows.get(i);
+            for (int j = 0; j < dataTableRow.size(); j++) {
+                Cell cell = row.createCell(j);
+                String dataTableCell = dataTableRow.get(j);
+                cell.setCellValue(dataTableCell);
             }
         }
+
+        // writing workbook to a file
+        FileOutputStream outputStream = new FileOutputStream("src/test/resources/output.xlsx");
+        workbook.write(outputStream);
+        outputStream.close();
     }
 }
