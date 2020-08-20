@@ -5,6 +5,7 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
 import org.apache.poi.ss.usermodel.*;
 import utils.ExcelReader;
+import utils.ExcelWriter;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -47,32 +48,11 @@ public class ExcelSteps {
     @Given("^I write to excel following data to sheet \"([^\"]*)\"$")
     public void iWriteToExcelFollowingData(String sheetName, DataTable table) throws IOException {
         String pathToFile = "src/test/resources/output.xlsx";
-
-        // create an new Workbook reference
-        Workbook workbook = null;
-        try {
-            workbook = WorkbookFactory.create(new FileInputStream(pathToFile)); // try reading existing file
-        } catch (FileNotFoundException e) {
-            workbook = WorkbookFactory.create(true); // if file not found, create new workbook
-        }
-
-        // filling in the data
-        Sheet sheet = workbook.createSheet(sheetName);
+        ExcelWriter writer = new ExcelWriter(pathToFile);
 
         List<List<String>> rows = table.asLists(String.class); // extract data from datatable as list of lists
-        for (int i = 0; i < rows.size(); i++) {
-            Row row = sheet.createRow(i);
-            List<String> dataTableRow = rows.get(i);
-            for (int j = 0; j < dataTableRow.size(); j++) {
-                Cell cell = row.createCell(j);
-                String dataTableCell = dataTableRow.get(j);
-                cell.setCellValue(dataTableCell);
-            }
-        }
 
-        // writing workbook to a file
-        FileOutputStream outputStream = new FileOutputStream(pathToFile);
-        workbook.write(outputStream);
-        outputStream.close();
+        writer.writeListOfLists(rows, sheetName);
+
     }
 }
