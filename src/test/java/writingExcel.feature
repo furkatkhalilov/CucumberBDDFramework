@@ -1,4 +1,4 @@
-Feature: This is excel feature reading from data.xlsx
+Feature: This is excel feature writing to output.xlsx
   Scenario: List Scenario
     Given I write to excel following data to sheet "List" as "list"
       |  data11 |
