@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.DataTable;
 import cucumber.api.java.en.*;
 import utils.ExcelReader;
 
@@ -36,5 +37,14 @@ public class ExcelSteps {
         ExcelReader reader = new ExcelReader("src/main/resources/data.xlsx");
         List<Map<String,String>>  listOfMaps = reader.getListOfMaps("listMap");
         System.out.println(listOfMaps);
+    }
+
+    @Given("^I write to excel following data$")
+    public void iWriteToExcelFollowingData(DataTable table) {
+        List<List<String>> rows = table.asLists(String.class); // extract data from datatable as list of lists
+        for(List<String> column: rows) {
+            for (String cell: column) {
+            }
+        }
     }
 }
