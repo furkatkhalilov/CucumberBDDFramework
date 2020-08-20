@@ -6,6 +6,8 @@ import cucumber.api.java.en.*;
 import org.apache.poi.ss.usermodel.*;
 import utils.ExcelReader;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -44,8 +46,15 @@ public class ExcelSteps {
 
     @Given("^I write to excel following data to sheet \"([^\"]*)\"$")
     public void iWriteToExcelFollowingData(String sheetName, DataTable table) throws IOException {
+        String pathToFile = "src/test/resources/output.xlsx";
+
         // create an new Workbook reference
-        Workbook workbook = WorkbookFactory.create(true);
+        Workbook workbook = null;
+        try {
+            workbook = WorkbookFactory.create(new FileInputStream(pathToFile));
+        } catch (FileNotFoundException e) {
+            workbook = WorkbookFactory.create(true);
+        }
 
         // filling in the data
         Sheet sheet = workbook.createSheet(sheetName);
@@ -62,7 +71,7 @@ public class ExcelSteps {
         }
 
         // writing workbook to a file
-        FileOutputStream outputStream = new FileOutputStream("src/test/resources/output.xlsx");
+        FileOutputStream outputStream = new FileOutputStream(pathToFile);
         workbook.write(outputStream);
         outputStream.close();
     }

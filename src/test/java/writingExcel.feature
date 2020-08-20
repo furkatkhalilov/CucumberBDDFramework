@@ -1,6 +1,6 @@
 Feature: This is excel feature reading from data.xlsx
   Scenario: List Scenario
-    Given I write to excel following data to sheet "list"
+    Given I write to excel following data to sheet "List"
       |  data11 |
       |  data12 |
       |  data13 |
