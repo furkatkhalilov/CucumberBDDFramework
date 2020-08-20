@@ -51,9 +51,9 @@ public class ExcelSteps {
         // create an new Workbook reference
         Workbook workbook = null;
         try {
-            workbook = WorkbookFactory.create(new FileInputStream(pathToFile));
+            workbook = WorkbookFactory.create(new FileInputStream(pathToFile)); // try reading existing file
         } catch (FileNotFoundException e) {
-            workbook = WorkbookFactory.create(true);
+            workbook = WorkbookFactory.create(true); // if file not found, create new workbook
         }
 
         // filling in the data
