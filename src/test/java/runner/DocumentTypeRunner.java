@@ -9,7 +9,10 @@ import org.testng.annotations.BeforeSuite;
 import utils.ThreadLocalBaseDriver;
 
 @CucumberOptions(
-        plugin = {"html:target/cucumber-report"},
+        plugin = {
+                "html:target/cucumber-report",
+                "com.cucumber.listener.ExtentCucumberFormatter:target/extent_report/index.html" // extent report plugin
+        },
         features = {
                 "src/test/java/featureFiles/_day31_01_documents_type.feature"
         },
